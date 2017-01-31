@@ -9,7 +9,7 @@ import sip
 
 class CardlistWidget (QtGui.QWidget):
 
-	double_click = QtCore.pyqtSignal ( game_object )
+	double_clicked = QtCore.pyqtSignal ( game_object )
 
 	def __init__ ( self , parent = None ):
 		super().__init__( parent )
@@ -64,30 +64,26 @@ class CardlistWidget (QtGui.QWidget):
 		if child is None: return
 		clicked_index = self.layout().indexOf (child)
 		if clicked_index == self._current_top:
-			self.double_click.emit( child.card() )
+			self.double_clicked.emit( child.card() )
 		self.rearrange ( self.layout().indexOf( child ) )
 
 	def insert ( self , card ):
 		widget = CardWidget ( self )
 		widget.set_card ( card )
-		self._widgets [card]  = widget
+		self._widgets [card.id()]  = widget
 		self.addWidget ( widget )
 
 	def erase ( self , card ):
-		widget = self._widgets.pop ( card )
+		widget = self._widgets.pop ( card.id() )
 		self.removeWidget ( widget )
 		sip.delete ( widget )
 
-	def clear ( self ):
-		for key in list(self._widgets.keys()):
-			self.erase ( key )
-
 	def update_cards ( self , cardstack ):
 		for card in cardstack:
-			if self._widgets.keys().isdisjoint ( [card] ):
+			if self._widgets.keys().isdisjoint ( [card.id()] ):
 				self.insert ( card )
 
-		for card in list(self._widgets.keys()):
-			if not card in cardstack:
-				self.erase ( card )
+		for _ , card in list(self._widgets.items()):
+			if not card.card() in cardstack:
+				self.erase ( card.card() )
 

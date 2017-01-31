@@ -63,3 +63,9 @@ class cardstack:
 	def shuffle ( self ):
 		shuffle ( self._order )
 
+	def find ( self , card ):
+		for key , value in self._items.items():
+			if value == card:
+				return key
+		return None
+

@@ -10,6 +10,12 @@ class game_object:
 		self._attributes = dict()
 		self._id = self.next_id()
 
+	def __eq__ ( self , other ):
+		if isinstance( other , type(self) ):
+			return self._id == other._id
+
+		return other.__eq__(self)
+
 	def __getitem__ ( self , key ):
 		if self._attributes.keys().isdisjoint ( [key] ):
 			return self._type[key]

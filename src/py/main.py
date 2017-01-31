@@ -44,12 +44,19 @@ guiworld [ deck_location ] = mw.deck
 for l in locations:
 	guiworld [l].update_cards ( world[l].cardstack() )
 
+def move ( origin , card_identifier , destination ):
+	guiworld.move ( origin , destination , world [
+		world.move ( cardworld.card_location ( origin , card_identifier ) , destination ) 
+	])
+
 def draw ():
-	new_loc = world.move ( cardworld.card_location (deck_location , 0) , hand_location )
-	card = world [ new_loc ]
-	guiworld.move ( deck_location , hand_location , card )
+	move ( deck_location , 0 , hand_location )
+
+def put_back ( card ):
+	move ( hand_location , world[ hand_location ].cardstack().find( card ) , deck_location )
 
 mw.draw.clicked.connect (draw)
+mw.hand.double_clicked.connect ( put_back )
 
 mw.show()
 
