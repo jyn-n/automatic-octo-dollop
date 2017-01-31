@@ -63,9 +63,9 @@ class CardlistWidget (QtGui.QWidget):
 		child = directChildAt ( event.pos() )
 		if child is None: return
 		clicked_index = self.layout().indexOf (child)
+		self.rearrange ( clicked_index )
 		if clicked_index == self._current_top:
 			self.double_clicked.emit( child.card() )
-		self.rearrange ( self.layout().indexOf( child ) )
 
 	def insert ( self , card ):
 		widget = CardWidget ( self )
