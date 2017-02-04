@@ -35,6 +35,9 @@ class cardworld:
 	def cardstack ( self ):
 		return self._cards
 
+	def stack ( self , stack ):
+		self._cards = stack
+
 	def __getitem__ ( self , loc ):
 		if type(loc) == cardworld.card_location:
 			return self.resolve_card ( loc )

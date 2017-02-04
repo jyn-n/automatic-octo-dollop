@@ -3,35 +3,26 @@
 from main_window import main_window
 from core import cardworld , game_object , game_object_type
 from gui import cardworld_gui
-from common import card_attribute as ca
+from common import card_attribute as ca , load_type_dir , directories as d , load_deck
 
 from PyQt4 import QtGui , QtCore
 import sys
-import sip
-from copy import deepcopy
 
 app = QtGui.QApplication(sys.argv)
 mw = main_window()
 
-cards = []
+card_types = load_type_dir ( d.card_types )
 
-card_type = game_object_type()
-
-for i in range(50):
-	c = game_object(card_type)
-	c[ca.text] = 'card' + str(i)
-	c[ca.check_size] = 0
-	c[ca.time] = 0
-	c[ca.effect] = '$effect'
-	cards.append(c)
+deck = load_deck ( d.decks / 'foo.deck' , card_types )
 
 world = cardworld()
 
 hand_location = ('hand',)
 deck_location = ('deck',)
 
-for card in cards:
-	world[deck_location].cardstack().insert(card)
+for k , v in deck.items():
+	print(k,type(v),list(v))
+	world[[k]].stack(v)
 
 world[deck_location].cardstack().shuffle()
 

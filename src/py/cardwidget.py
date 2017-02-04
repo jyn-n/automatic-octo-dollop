@@ -25,7 +25,7 @@ class CardWidget (ui_card_widget , base_class):
 
 	def show_card ( self ):
 		for label , text in (
-			  (self.title , self._card[ ca.text ])
+			  (self.title , self._card[ ca.title ])
 			, (self.effect , self._card[ ca.effect ])
 			, (self.check_size , str(self._card[ ca.check_size ]))
 			, (self.time , str(self._card[ ca.time ]))
