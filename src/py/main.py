@@ -26,6 +26,9 @@ mw = main_window()
 guiworld = cardworld_gui()
 guiworld [ g.location ( p , pl.hand ) ] = mw.hand
 guiworld [ g.location ( p , pl.deck ) ] = mw.deck
+guiworld [ g.location ( p , pl.reveal ) ] = mw.reveal
+guiworld [ g.location ( p , pl.discard ) ] = mw.discard
+guiworld [ g.location ( p , pl.play ) ] = mw.play
 guiworld.update ( g.cardworld() )
 
 def draw ():
@@ -37,9 +40,29 @@ def move ( origin , destination ):
 def play ( card_location ):
 	e ( event.play , p , card_location )
 
-mw.draw.clicked.connect (draw)
+def show_successes ():
+	text = ''
+	reveal = g.cardworld() [ g.location ( p , pl.reveal ) ].cardstack()
+	for key in reveal:
+		text += reveal [ key ] [ ca.successes ]
+
+	mw.successes.setText ( text )
+
+def update_deck_size (*args):
+	mw.deck_size.setText ( str ( len ( g.cardworld() [ g.location ( p , pl.deck) ].cardstack() ) ) )
+
+def cleanup ():
+	e ( event.cleanup_cardplay , p )
+
+update_deck_size ()
+show_successes ()
+
+mw.draw.clicked.connect ( draw )
 e.register_event ( event.post_card_move, move )
-mw.hand.double_clicked.connect (play)
+e.register_event ( event.post_card_move, update_deck_size )
+mw.hand.double_clicked.connect ( play )
+e.register_event ( event.post_play, show_successes )
+mw.cleanup.clicked.connect ( cleanup )
 
 mw.show()
 sys.exit(app.exec_())

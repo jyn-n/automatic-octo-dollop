@@ -108,10 +108,12 @@ class game:
 		for i in range ( card [ ca.check_size ] ):
 			self._event ( e.reveal , player )
 
+		self._event ( e.post_play )
+
 	def cleanup_cardplay ( self , player ):
 		location = partial ( self.location , player )
 
 		discard = location ( pl.discard )
 		self._move_location ( location ( pl.play ) , discard )
-		self._move_location ( location ( pl.check ) , discard )
+		self._move_location ( location ( pl.reveal ) , discard )
 

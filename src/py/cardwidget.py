@@ -26,6 +26,7 @@ class CardWidget (ui_card_widget , base_class):
 			, (self.effect , self._card[ ca.effect ])
 			, (self.check_size , str(self._card[ ca.check_size ]))
 			, (self.time , str(self._card[ ca.time ]))
+			, (self.successes , self._card[ ca.successes ])
 			):
 			label.setText ( text )
 

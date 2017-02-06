@@ -7,6 +7,6 @@ attributes: {
           bar',
  time: 0,
  check_size: 2,
- successes: S
+ successes: T
 }
 }
