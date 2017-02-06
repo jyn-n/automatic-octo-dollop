@@ -7,5 +7,5 @@ class id_factory:
 	def __call__ ( self ):
 		result = self._current_id
 		self._current_id += 1
-		return result
+		return str(result)
 

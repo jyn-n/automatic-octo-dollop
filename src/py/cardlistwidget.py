@@ -2,14 +2,14 @@ from PyQt4 import QtGui , QtCore
 
 from overlap_layout import OverlapLayout
 
-from core import cardstack , game_object
+from core import cardstack , game_object , cardworld
 from cardwidget import CardWidget
 
 import sip
 
 class CardlistWidget (QtGui.QWidget):
 
-	double_clicked = QtCore.pyqtSignal ( game_object )
+	double_clicked = QtCore.pyqtSignal ( cardworld.card_location )
 
 	def __init__ ( self , parent = None ):
 		super().__init__( parent )
@@ -17,6 +17,8 @@ class CardlistWidget (QtGui.QWidget):
 		self._current_top = None
 		self.setLayout ( OverlapLayout (self) )
 		self._widgets = dict()
+		self._locations = dict()
+		self._location = None
 
 	def rearrange ( self , new_top ):
 
@@ -66,25 +68,33 @@ class CardlistWidget (QtGui.QWidget):
 		emit_later = (clicked_index == self._current_top)
 		self.rearrange ( clicked_index )
 		if emit_later:
-			self.double_clicked.emit( child.card() )
+			self.double_clicked.emit( cardworld.card_location ( self._location , self.location(child.card())  ) )
 
-	def insert ( self , card ):
-		widget = CardWidget ( self )
-		widget.set_card ( card )
-		self._widgets [card.id()]  = widget
+	def insert ( self , card_location , card ):
+		widget = CardWidget ( card , self )
+		self._widgets [ card.id() ] = widget
+		self._locations [ card.id() ] = card_location
 		self.addWidget ( widget )
 
-	def erase ( self , card ):
+	def erase ( self , location ):
+		card = self._widgets [ location ].card()
 		widget = self._widgets.pop ( card.id() )
+		self._locations.pop ( card.id() )
 		self.removeWidget ( widget )
 		sip.delete ( widget )
 
-	def update_cards ( self , cardstack ):
-		for card in cardstack:
-			if self._widgets.keys().isdisjoint ( [card.id()] ):
-				self.insert ( card )
+	def location ( self , card ):
+		return self._locations [ card.id() ]
 
-		for _ , card in list(self._widgets.items()):
-			if not card.card() in cardstack:
-				self.erase ( card.card() )
+	def update_cards ( self , cardstack , location ):
+		self._location = location
+		for key in cardstack:
+			card = cardstack[key]
+			if self._widgets.keys().isdisjoint ( [card.id()] ):
+				self.insert ( cardworld.card_location ( location , key ) , card )
+
+		for card in list(self._widgets.values()):
+			cards = [ cardstack [ key ] for key in cardstack ]
+			if not card.card() in cards:
+				self.erase ( self.location(card.card()) )
 

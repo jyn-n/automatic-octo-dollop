@@ -9,14 +9,11 @@ class CardWidget (ui_card_widget , base_class):
 
 	clicked = QtCore.pyqtSignal ()
 
-	def __init__ ( self , parent = None ):
+	def __init__ ( self , card , card_location , parent = None ):
 		ui_card_widget.__init__(self)
 		base_class.__init__(self , parent)
 		self.setupUi(self)
 
-		self._card = None
-
-	def set_card ( self , card ):
 		self._card = card
 		self.show_card()
 

@@ -1,11 +1,12 @@
 !!python/object:common.load._type_file {
 name: c1,
 attributes: {
- title: 'c1',
+ title: c1,
  effect: 'foo
 
           bar',
  time: 0,
- check_size: 0
+ check_size: 1,
+ successes: S
 }
 }

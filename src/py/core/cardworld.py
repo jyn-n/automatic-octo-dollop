@@ -28,6 +28,9 @@ class cardworld:
 		def card ( self ):
 			return self._card_identifier
 
+		def __str__ ( self ):
+			return str(self.stack()) + ' ' + str(self.card())
+
 	def __init__ ( self ):
 		self._items = dict()
 		self._cards = cardstack()
@@ -39,7 +42,7 @@ class cardworld:
 		self._cards = stack
 
 	def __getitem__ ( self , loc ):
-		if type(loc) == cardworld.card_location:
+		if type(loc) is cardworld.card_location:
 			return self.resolve_card ( loc )
 		return self.resolve_location ( loc )
 

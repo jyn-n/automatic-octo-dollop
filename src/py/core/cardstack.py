@@ -1,30 +1,31 @@
 
-from .id_factory import id_factory
 from random import shuffle
 
 class cardstack:
 
 	def __init__ ( self ):
-		self._key_factory = id_factory()
 		self._items = dict()
 		self._order = list()
-		self._unused_keys = list()
+
+	def __len__ ( self ):
+		return len ( self._items )
 
 	def __getitem__ ( self , ident ):
 		return self._items[self._to_key(ident)]
 
 	def __iter__ ( self ):
-		class iterator:
-			def __init__ ( inner_self ):
-				inner_self._iter = iter(self._order)
+	#	class iterator:
+	#		def __init__ ( inner_self ):
+	#			inner_self._iter = iter(self._order)
 
-			def __next__ ( inner_self ):
-				try:
-					return self._items[next(inner_self._iter)]
-				except StopIteration:
-					raise StopIteration()
+	#		def __next__ ( inner_self ):
+	#			try:
+	#				return self._items[next(inner_self._iter)]
+	#			except StopIteration:
+	#				raise StopIteration()
 
-		return iterator()
+	#	return iterator()
+		return iter(self._order)
 
 	@staticmethod
 	def _is_key ( key ):
@@ -35,16 +36,11 @@ class cardstack:
 			return pos
 		return self._order[pos]
 
-	def _key ( self ):
-		if len(self._unused_keys) == 0:
-			self._unused_keys.append(str(self._key_factory()))
-		return self._unused_keys.pop()
-
 
 	def insert ( self , value , position = None ):
 		if position is None:
 			position = len(self._order)
-		key = self._key()
+		key = value.id()
 		self._items [ key ] = value
 		self._order.insert( position , key )
 		return key
@@ -56,7 +52,6 @@ class cardstack:
 			raise KeyError(key)
 
 		self._order.remove(key)
-		self._unused_keys.append(key)
 
 		return self._items.pop(key)
 
