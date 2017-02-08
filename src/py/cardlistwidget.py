@@ -1,6 +1,6 @@
 from PyQt4 import QtGui , QtCore
 
-from overlap_layout import OverlapLayout
+from overlap_layout import OverlapLayout , FactorWidth
 
 from core import cardstack , game_object , cardworld
 from cardwidget import CardWidget
@@ -15,7 +15,7 @@ class CardlistWidget (QtGui.QWidget):
 		super().__init__( parent )
 
 		self._current_top = None
-		self.setLayout ( OverlapLayout (self) )
+		self.setLayout ( OverlapLayout ( self, FactorWidth(.8) ) )
 		self._widgets = dict()
 		self._locations = dict()
 		self._location = None
