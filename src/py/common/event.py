@@ -8,4 +8,5 @@ pre_play = 'pre_play'
 play = 'play'
 post_play = 'post_play'
 cleanup_cardplay = 'cleanup_cardplay'
+discard = 'discard'
 

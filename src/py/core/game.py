@@ -4,6 +4,7 @@ from .game_object import game_object
 from .cardworld import cardworld
 from common import player_location as pl , event as e , card_attribute as ca
 from functools import partial
+from common import location as loc
 
 class game:
 
@@ -33,6 +34,7 @@ class game:
 		event.register_event ( e.reveal , self.reveal )
 		event.register_event ( e.play , self.play )
 		event.register_event ( e.cleanup_cardplay , self.cleanup_cardplay )
+		event.register_event ( e.discard , self.discard )
 
 	def players ( self ):
 		return self._players.values()
@@ -42,7 +44,7 @@ class game:
 			self._cardworld [ self.location ( player , location ) ].stack ( cards )
 
 	def location ( self , player , location ):
-		return cardworld.location ( ( str(player.id()) , ) , None , player[location] )
+		return cardworld.location ( ( loc.player , str(player.id()) ) , player[location] )
 
 	def cardworld ( self ):
 		return self._cardworld
@@ -116,4 +118,7 @@ class game:
 		discard = location ( pl.discard )
 		self._move_location ( location ( pl.play ) , discard )
 		self._move_location ( location ( pl.reveal ) , discard )
+
+	def discard ( self , player , card_location ):
+		self.move_card ( card_location , self.location ( player , pl.discard ) )
 

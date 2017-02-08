@@ -20,35 +20,54 @@ class CardlistWidget (QtGui.QWidget):
 		self._locations = dict()
 		self._location = None
 
+		#TODO set this value in designer
+		self._highlighting = True
+
+	def highlighting ( self , highlighting = None ):
+		if not highlighting is None:
+			self._highlighting = highlighting
+		return self._highlighting
+
 	def rearrange ( self , new_top ):
+		if not self._current_top is None:
+			sign = lambda i: (i>0) - (i<0)
+			direction = sign (new_top - self._current_top)
+			if direction != 0:
+				for i in range( self._current_top , new_top , direction ):
+					self.layout().itemAt(i + direction).widget().raise_()
+		self.currentTop ( new_top )
 
-		if self._current_top is None: return
-
-		sign = lambda i: (i>0) - (i<0)
-		direction = sign (new_top - self._current_top)
-
-		if direction == 0: return
-
-		for i in range( self._current_top , new_top , direction ):
-			self.layout().itemAt(i + direction).widget().raise_()
-
-		self._current_top = new_top
+	def currentTop ( self , i ):
+		if not self._current_top is None:
+			self.currentItem().widget().highlight ( False )
+		self._current_top = i
+		if not self._current_top is None:
+			if self.highlighting():
+				self.currentItem().widget().highlight ( True )
 
 	def addWidget ( self , widget ):
-		if self._current_top is None: self._current_top = 0
+		widget.highlight ( False )
 		self.layout().addWidget ( widget )
 		widget.lower()
+		if self._current_top is None:
+			self.currentTop (0)
 
 	def removeWidget ( self , widget ):
-		if len(self._widgets) == 0:
-			self._current_top = None
-		elif self.layout().indexOf( widget ) <= self._current_top:
-			self._current_top -= 1
-			if self._current_top < 0:
-				self.rearrange(0)
-				self._current_top = 0
+		switch_top = False
+		if self.layout().indexOf( widget ) == self._current_top:
+			if self._current_top > 0:
+				self.rearrange ( self._current_top - 1 )
+			elif len(self._widgets) > 0:
+				self.rearrange(1)
+				switch_top = True
+			else:
+				self.currentTop ( None )
 
 		self.layout().removeWidget ( widget )
+		if switch_top:
+			self._current_top = None
+			self.currentTop (0)
+
 
 	def currentItem ( self ):
 		return self.layout().itemAt ( self._current_top )
@@ -97,4 +116,9 @@ class CardlistWidget (QtGui.QWidget):
 			cards = [ cardstack [ key ] for key in cardstack ]
 			if not card.card() in cards:
 				self.erase ( self.location(card.card()) )
+
+	def current_card_location ( self ):
+		item = self.currentItem ()
+		if item is None: return None
+		return cardworld.card_location ( self._location , self.location ( item.widget().card() ) )
 

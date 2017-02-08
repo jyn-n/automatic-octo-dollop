@@ -17,6 +17,9 @@ class cardworld:
 		def __iter__ ( self ):
 			return self._iter.clone()
 
+		def __str__ ( self ):
+			return str ( list ( self ) )
+
 	class card_location:
 		def __init__ ( self , stack_location , card_identifier ):
 			self._stack_location = stack_location

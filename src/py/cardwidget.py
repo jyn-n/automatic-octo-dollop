@@ -22,11 +22,19 @@ class CardWidget (ui_card_widget , base_class):
 
 	def show_card ( self ):
 		for label , text in (
-			  (self.title , self._card[ ca.title ])
-			, (self.effect , self._card[ ca.effect ])
-			, (self.check_size , str(self._card[ ca.check_size ]))
-			, (self.time , str(self._card[ ca.time ]))
-			, (self.successes , self._card[ ca.successes ])
+			  (self.label_title , self._card[ ca.title ])
+			, (self.label_effect , self._card[ ca.effect ])
+			, (self.label_check_size , str(self._card[ ca.check_size ]))
+			, (self.label_time , str(self._card[ ca.time ]))
+			, (self.label_successes , self._card[ ca.successes ])
 			):
 			label.setText ( text )
+
+	def _rim_color ( self , color ):
+		palette = self.palette()
+		palette.setColor ( self.backgroundRole() , color )
+		self.setPalette ( palette )
+
+	def highlight ( self , do):
+		self._rim_color ( { True : QtGui.QColor ( 'red' ) , False : QtGui.QColor ( 'black' ) } [do] )
 
