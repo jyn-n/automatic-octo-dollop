@@ -32,6 +32,8 @@ class cardstack {
 
 	public:
 
+		cardstack() = default;
+
 		size_type size () const;
 
 		value_type & operator[] ( key_type const & key );
@@ -45,7 +47,7 @@ class cardstack {
 		value_type erase ( order_type const & position );
 
 		template < typename Rng >
-		this_type & shuffle ( Rng & rng );
+		this_type & shuffle ( Rng && rng );
 };
 
 #include "cardstack.inl"
