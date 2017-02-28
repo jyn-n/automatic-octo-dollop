@@ -1,4 +1,6 @@
 
+#include "cardstack.hpp"
+
 auto cardstack::size () const -> size_type 
 {
 	return _cards.size();
@@ -16,17 +18,19 @@ auto cardstack::operator[] ( key_type const & key ) const -> value_type const &
 
 auto cardstack::operator[] ( order_type const & position ) -> value_type & 
 {
-	return (*this) [ _order [ position ] ]
+	return (*this) [ _order [ position ] ];
 }
 
 auto cardstack::operator[] ( order_type const & position ) const -> value_type const & 
 {
-	return (*this) [ _order [ position ] ]
+	return (*this) [ _order [ position ] ];
 }
 
 auto cardstack::insert ( value_type && value ) -> key_type 
 {
-	auto key = _cards [ value.id() ] = std::move ( value );
+	auto key = std::to_string ( value.id() );
+	_cards.insert ( std::make_pair ( key , std::move ( value ) ) );
+	//TODO throw
 	_order.push_back ( key );
 	return key;
 }

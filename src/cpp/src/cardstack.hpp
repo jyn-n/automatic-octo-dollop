@@ -6,7 +6,7 @@
 #include <map>
 #include <vector>
 
-#include "game_object"
+#include "game_object.hpp"
 
 class cardstack {
 

@@ -4,6 +4,9 @@
 
 #include "cardstack.hpp"
 
+template < typename Begin , typename End >
+class iterator_range;
+
 class cardworld {
 
 	public:
@@ -12,7 +15,7 @@ class cardworld {
 		using cardstack_type = cardstack;
 		using key_type = cardstack::key_type;
 
-		using card_type = cardstacL_type::value_type;
+		using card_type = cardstack_type::value_type;
 
 		class stack_location;
 		class card_location;
@@ -28,8 +31,8 @@ class cardworld {
 
 		cardworld () = default;
 
-		cardstack_type & cardstack ();
-		cardstack_type const & cardstack ();
+		cardstack_type & stack ();
+		cardstack_type const & stack () const;
 
 		cardstack_type & operator[] ( stack_location const & location );
 		cardstack_type const & at ( stack_location const & location ) const;
@@ -37,7 +40,16 @@ class cardworld {
 		card_type & operator[] ( card_location const & location );
 		card_type const & at ( card_location const & location ) const;
 
+	private:
+
+		template < typename Begin , typename End = Begin >
+		cardstack_type & operator[] ( iterator_range<Begin,End> & range );
+
+		template < typename Begin , typename End = Begin >
+		cardstack_type const & at ( iterator_range<Begin,End> & range ) const;
 };
+
+#include "cardworld.inl"
 
 #endif
 

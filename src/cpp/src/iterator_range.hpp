@@ -20,13 +20,20 @@ class iterator_range {
 	public:
 
 		iterator_range ( begin_type const & begin , end_type const & end );
+		template < typename T >
+		iterator_range ( T const & t );
 
 		begin_type begin () const;
+		begin_type & begin ();
 		end_type end () const;
+		bool empty () const;
 };
 
 template < typename Begin , typename End = Begin >
 iterator_range < Begin , End > make_range ( Begin begin , End end );
+
+template < typename T >
+auto make_range ( T const & t ) -> iterator_range < decltype (std::begin(t)) , decltype (std::end(t)) >;
 
 #include "iterator_range.inl"
 
