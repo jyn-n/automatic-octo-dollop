@@ -1,19 +1,65 @@
 
-#include "game_object.hpp"
+#include "cardworld.hpp"
 
 #include <iostream>
 
-game_object foo ( game_object && g ) { return std::move (g); }
+#include <random>
+
+template < typename T >
+void print ( T const & t )
+{
+	for ( auto const & x : t ) std::cout << x << ' ';
+	std::cout << '\n';
+}
+
+std::ostream & operator<< ( std::ostream & out , game_object const & obj )
+{
+	return out << obj.id();
+}
+
+template < typename First , typename Second >
+std::ostream & operator<< ( std::ostream & out , std::pair<First,Second> const & pair )
+{
+	return out << '(' << pair.first << ',' << pair.second << ')';
+}
 
 int main () {
 
+	/*/
+	std::mt19937_64 rng;
+	/*/
+	std::random_device rng;
+	//*/
+
 	game_object::object_base_type b;
 
-	game_object g ( b );
-	game_object h ( b );
+	cardworld world;
 
-	game_object i = foo ( std::move(h) );
+	cardworld::stack_location s1 { "foo" , "bar" } ;
+	cardworld::stack_location s2 { "foo" , "quux" } ;
 
+	world[s1];
+	world[s2];
+
+	auto l = world.insert ( s1 , game_object (b) );
+	world.move ( l , s2 );
+
+	world.insert ( s2 , game_object (b) );
+	world.insert ( s2 , game_object (b) );
+	world.insert ( s2 , game_object (b) );
+	world.insert ( s2 , game_object (b) );
+	world.insert ( s2 , game_object (b) );
+
+	world[s2].shuffle(rng);
+
+	print ( world.at(s2) );
+
+	l = world.move ( s2 , 0 , s1 );
+	l = world.move ( s2 , 2 , s1 );
+
+	print ( world.at(s1) );
+	print ( world.at(s2) );
 
 	return 0;
 }
+

@@ -16,6 +16,7 @@ class cardworld {
 		using key_type = cardstack::key_type;
 
 		using card_type = cardstack_type::value_type;
+		using order_type = cardstack_type::order_type;
 
 		class stack_location;
 		class card_location;
@@ -40,6 +41,12 @@ class cardworld {
 		card_type & operator[] ( card_location const & location );
 		card_type const & at ( card_location const & location ) const;
 
+		card_location insert ( stack_location const & destination , game_object && card );
+		game_object erase ( card_location const & location );
+		game_object erase ( stack_location const & location , order_type const & position );
+		card_location move ( card_location const & origin , stack_location const & destination );
+		card_location move ( stack_location const & origin , order_type const & position , stack_location const & destination );
+
 	private:
 
 		template < typename Begin , typename End = Begin >
@@ -50,6 +57,12 @@ class cardworld {
 };
 
 #include "cardworld.inl"
+
+#include "cardworld_stack_location.hpp"
+
+#ifndef CARDWORLD_STACK_LOCATION_CPP
+	#include "cardworld_card_location.hpp"
+#endif
 
 #endif
 

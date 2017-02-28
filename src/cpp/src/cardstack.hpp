@@ -22,6 +22,9 @@ class cardstack {
 		using container_type = std::map < key_type , value_type >;
 		using order_container_type = std::vector < key_type >;
 
+		template < typename Base , typename Value >
+		class basic_iterator;
+
 		container_type _cards;
 		order_container_type _order;
 
@@ -30,11 +33,21 @@ class cardstack {
 		using size_type = container_type::size_type;
 		using order_type = order_container_type::size_type;
 
+		using iterator = basic_iterator < this_type , value_type >;
+		using const_iterator = basic_iterator < this_type const , value_type const >;
+
 	public:
 
 		cardstack() = default;
 
 		size_type size () const;
+
+		iterator begin ();
+		iterator end ();
+		const_iterator begin () const;
+		const_iterator end () const;
+		const_iterator cbegin () const;
+		const_iterator cend () const;
 
 		value_type & operator[] ( key_type const & key );
 		value_type const & operator[] ( key_type const & key ) const;
@@ -49,6 +62,8 @@ class cardstack {
 		template < typename Rng >
 		this_type & shuffle ( Rng && rng );
 };
+
+#include "cardstack_basic_iterator.hpp"
 
 #include "cardstack.inl"
 

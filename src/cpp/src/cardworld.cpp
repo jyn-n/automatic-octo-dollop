@@ -36,3 +36,28 @@ auto cardworld::at ( card_location const & location ) const -> card_type const &
 	return at ( location.stack() ) [ location.card() ];
 }
 
+auto cardworld::insert ( stack_location const & destination , game_object && card ) -> card_location 
+{
+	return card_location ( destination , (*this) [ destination ].insert ( std::move (card) ) );
+}
+
+auto cardworld::erase ( card_location const & location ) -> game_object 
+{
+	return (*this) [ location.stack() ].erase ( location.card() );
+}
+
+auto cardworld::erase ( stack_location const & location , order_type const & position ) -> game_object 
+{
+	return (*this) [ location ].erase ( position );
+}
+
+auto cardworld::move ( card_location const & origin , stack_location const & destination ) -> card_location 
+{
+	return insert ( destination , erase ( origin ) );
+}
+
+auto cardworld::move ( stack_location const & origin , order_type const & position , stack_location const & destination ) -> card_location 
+{
+	return insert ( destination , erase ( origin , position ) );
+}
+

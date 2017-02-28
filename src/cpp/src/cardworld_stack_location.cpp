@@ -1,6 +1,7 @@
 
-#include "cardworld_stack_location.hpp"
+#define CARDWORLD_STACK_LOCATION_CPP
 
+#include "cardworld_stack_location.hpp"
 
 cardworld::stack_location::stack_location ( container_type const & items )
 : _items ( items )
@@ -9,6 +10,11 @@ cardworld::stack_location::stack_location ( container_type const & items )
 
 cardworld::stack_location::stack_location ( container_type && items )
 : _items ( std::move ( items ) )
+{
+}
+
+cardworld::stack_location::stack_location ( std::initializer_list < key_type > keys )
+: _items ( keys )
 {
 }
 

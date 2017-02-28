@@ -19,6 +19,7 @@ class cardworld::stack_location {
 
 		stack_location ( container_type const & items );
 		stack_location ( container_type && items );
+		stack_location ( std::initializer_list < key_type > keys );
 
 		const_iterator begin () const;
 		const_iterator end () const;
