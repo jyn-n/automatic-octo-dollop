@@ -68,16 +68,16 @@ auto cardstack::insert ( value_type && value ) -> key_type
 
 auto cardstack::erase ( key_type const & key ) -> value_type 
 {
-	key_type old_key ( key );
-	_order.erase ( std::remove ( _order.begin() , _order.end() , old_key ) , _order.end() );
+	_order.erase ( std::remove ( _order.begin() , _order.end() , key ) , _order.end() );
 
-	auto result = std::move ( _cards.at ( old_key ) );
-	_cards.erase ( old_key );
+	auto result = std::move ( _cards.at ( key ) );
+	_cards.erase ( key );
 	return result;
 }
 
 auto cardstack::erase ( order_type const & position ) -> value_type 
 {
-	return erase ( _order [ position ] );
+	auto key = _order [ position ];
+	return erase ( key );
 }
 
