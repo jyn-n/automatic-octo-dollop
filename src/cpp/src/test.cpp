@@ -1,5 +1,5 @@
 
-#include "cardworld.hpp"
+#include "../core/include/cardworld.hpp"
 
 #include <iostream>
 
@@ -23,13 +23,16 @@ std::ostream & operator<< ( std::ostream & out , std::pair<First,Second> const &
 	return out << '(' << pair.first << ',' << pair.second << ')';
 }
 
+template < typename RNG >
+void foo ( RNG && rng )
+{
+	std::cout << rng() << '\n';
+}
+
 int main () {
 
-	/*/
-	std::mt19937_64 rng;
-	/*/
-	std::random_device rng;
-	//*/
+	std::random_device seed;
+	std::mt19937_64 rng { seed () };
 
 	game_object::object_base_type b;
 
@@ -59,6 +62,8 @@ int main () {
 
 	print ( world.at(s1) );
 	print ( world.at(s2) );
+
+	for (int i = 0; i != 10; ++i) foo (rng);
 
 	return 0;
 }
