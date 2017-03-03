@@ -1,5 +1,5 @@
 
-#include "../core/include/cardworld.hpp"
+#include "core/cardworld.hpp"
 
 #include <iostream>
 
