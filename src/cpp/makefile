@@ -11,7 +11,7 @@ BUILD_REQUIREMENTS := build_requirements__
 SRC_DIR := src
 HDR_DIR := hdr
 INL_DIR := inl
-INCLUDE_DIRS := #$(HDR_DIR) $(INL_DIR)
+INCLUDE_DIRS := $(HDR_DIR) $(INL_DIR)
 DIRS := $(INCLUDE_DIRS) $(SRC_DIR) $(BUILD_DIR) $(HDR_DIR) $(INL_DIR)
 
 MODULE_FILES := $(filter-out $(DIRS),$(patsubst %/.,%,$(wildcard */.)))
@@ -27,7 +27,7 @@ INL_FILES := $(wildcard $(INL_DIR)/*.inl)
 LIB_NAME := $(BUILD_LIB_DIR)/$(NAME).a
 
 BUILD_HPP_FILES := $(HPP_FILES:$(HDR_DIR)/%=$(BUILD_INCLUDE_DIR)/%)
-BUILD_INL_FILES := $(INL_FILES:$(HDR_DIR)/%=$(BUILD_INCLUDE_DIR)/%)
+BUILD_INL_FILES := $(INL_FILES:$(INL_DIR)/%=$(BUILD_INCLUDE_DIR)/%)
 BUILD_LIB_FILES := $(foreach f,$(MODULE_FILES),$(BUILD_LIB_DIR)/$f/$(notdir $f).a)
 
 SUBMODULE_MAKEFILE := submodule.mk
@@ -42,20 +42,22 @@ AR := ar
 AR_FLAGS := rvT
 M4 := m4
 
-$(NAME): $(BUILD_REQUIREMENTS)
+$(NAME): $(BUILD_INL_FILES) $(BUILD_HPP_FILES) $(BUILD_LIB_FILES) $(OBJ_FILES)
 	$(CXX) $(LD_FLAGS) -o $@ $(OBJ_FILES) $(BUILD_LIB_FILES)
 
-$(LIB_NAME): $(BUILD_REQUIREMENTS)
+$(LIB_NAME): $(BUILD_INL_FILES) $(BUILD_HPP_FILES) $(BUILD_LIB_FILES) $(OBJ_FILES)
 	@mkdir -p $(BUILD_LIB_DIR)
 	@$(AR) $(AR_FLAGS) $@ $(OBJ_FILES) $(LIB_FILES)
-
-$(BUILD_REQUIREMENTS): $(BUILD_INL_FILES) $(BUILD_HPP_FILES) $(BUILD_LIB_FILES) $(OBJ_FILES)
 
 $(BUILD_OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(BUILD_OBJ_DIR)
 	$(CXX) $(CXX_FLAGS) $(INCLUDE_FLAGS) -c -o $@ $<
 
 $(BUILD_INCLUDE_DIR)/%.hpp: $(HDR_DIR)/%.hpp
+	@mkdir -p $(BUILD_INCLUDE_DIR)
+	cp $< $@
+
+$(BUILD_INCLUDE_DIR)/%.inl: $(INL_DIR)/%.inl
 	@mkdir -p $(BUILD_INCLUDE_DIR)
 	cp $< $@
 
@@ -70,5 +72,5 @@ $(MODULE_MAKEFILES): $(SUBMODULE_MAKEFILE)
 
 include $(MODULE_MAKEFILES)
 
-.PHONY: clean $(BUILD_REQUIREMENTS)
+.PHONY: clean
 

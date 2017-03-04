@@ -10,7 +10,7 @@ DIR__-BUILD_OBJ_DIR := $(DIR__-BUILD_LIB_DIR)
 DIR__-SRC_DIR := $(DIR__-HERE)/src
 DIR__-HDR_DIR := $(DIR__-HERE)/hdr
 DIR__-INL_DIR := $(DIR__-HERE)/inl
-DIR__-INCLUDE_DIRS := #$(DIR__-HDR_DIR) $(DIR__-INL_DIR)
+DIR__-INCLUDE_DIRS := $(DIR__-HDR_DIR) $(DIR__-INL_DIR)
 DIR__-DIRS := $(DIR__-INCLUDE_DIRS) $(DIR__-SRC_DIR) $(DIR__-BUILD_OBJ_DIR) $(DIR__-HDR_DIR) $(DIR__-INL_DIR)
 
 DIR__-MODULE_FILES := $(filter-out $(DIR__-DIRS),$(patsubst %/.,%,$(wildcard $(DIR__-HERE)/*/.)))
@@ -26,10 +26,10 @@ DIR__-INL_FILES := $(wildcard $(DIR__-INL_DIR)/*.inl)
 DIR__-LIB_NAME := $(BUILD_LIB_DIR)/$(DIR__-NAME).a
 
 DIR__-BUILD_HPP_FILES := $(DIR__-HPP_FILES:$(DIR__-HDR_DIR)/%=$(DIR__-BUILD_INCLUDE_DIR)/%)
-DIR__-BUILD_INL_FILES := $(DIR__-INL_FILES:$(DIR__-HDR_DIR)/%=$(DIR__-BUILD_INCLUDE_DIR)/%)
+DIR__-BUILD_INL_FILES := $(DIR__-INL_FILES:$(DIR__-INL_DIR)/%=$(DIR__-BUILD_INCLUDE_DIR)/%)
 DIR__-BUILD_LIB_FILES := $(foreach f,$(DIR__-MODULE_FILES),$(BUILD_LIB_DIR)/$f/$(notdir $f).a)
 
-DIR__-INCLUDE_FLAGS := $(DIR__-INCLUDE_DIRS:%=-I%) $(DIR__-BUILD_INCLUDE_DIR:%=-I%)
+DIR__-INCLUDE_FLAGS := $(DIR__-INCLUDE_DIRS:%=-I%) $(BUILD_INCLUDE_DIR:%=-I%)
 
 $(DIR__-NAME): $(DIR__-BUILD_INL_FILES) $(DIR__-BUILD_HPP_FILES) $(DIR__-BUILD_LIB_FILES) $(DIR__-OBJ_FILES)
 	$(CXX) $(LD_FLAGS) -o $@ $(DIR__-OBJ_FILES) $(DIR__-BUILD_LIB_FILES)
@@ -43,6 +43,10 @@ $(DIR__-BUILD_OBJ_DIR)/%.o: $(DIR__-SRC_DIR)/%.cpp
 	$(CXX) $(CXX_FLAGS) $(DIR__-INCLUDE_FLAGS) -c -o $@ $<
 
 $(DIR__-BUILD_INCLUDE_DIR)/%.hpp: $(DIR__-HDR_DIR)/%.hpp
+	@mkdir -p $(DIR__-BUILD_INCLUDE_DIR)
+	cp $< $@
+
+$(DIR__-BUILD_INCLUDE_DIR)/%.inl: $(DIR__-INL_DIR)/%.inl
 	@mkdir -p $(DIR__-BUILD_INCLUDE_DIR)
 	cp $< $@
 
