@@ -8,9 +8,10 @@ OBJ_FILES := $(CPP_FILES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 DEP_FILES := $(OBJ_FILES:.o=.d)
 MODULE_FILES := $(filter-out $(DIRS),$(patsubst %/.,%,$(wildcard */.)))
 MODULE_MAKEFILES := $(MODULE_FILES:%=%/makefile)
-LIB_FILES := $(foreach f,$(MODULE_FILES),$f/$f.a)
+LIB_FILES := $(foreach f,$(MODULE_FILES),$f/$(notdir $f).a)
 
 SUBMODULE_MAKEFILE := submodule.mk
+SUBMODULE_MACRO_NAME := DIR__
 
 INCLUDE_FLAGS := $(INCLUDE_DIRS:%=-I%)
 
@@ -19,7 +20,7 @@ CXX_FLAGS := -std=c++17 -Wall -Wextra -pedantic -MMD -O2
 CXX := g++
 CPP := gcc -E
 AR := ar
-AR_FLAGS := rv
+AR_FLAGS := rvT
 M4 := m4
 
 NAME := cardgame
@@ -28,7 +29,7 @@ $(NAME): $(OBJ_FILES) $(LIB_FILES)
 	$(CXX) $(LD_FLAGS) -o $@ $(OBJ_FILES) $(LIB_FILES)
 
 $(NAME).a: $(OBJ_FILES) $(LIB_FILES)
-	$(AR) $(AR_FLAGS) $@ $(OBJ_FILES) $(LIB_FILES)
+	@$(AR) $(AR_FLAGS) $@ $(OBJ_FILES) $(LIB_FILES)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(OBJ_DIR)
@@ -39,7 +40,7 @@ clean: $(MODULE_FILES:%=%.clean)
 
 
 $(MODULE_MAKEFILES): $(SUBMODULE_MAKEFILE)
-	$(M4) -D DIR__=$(@:%/makefile=%) $(SUBMODULE_MAKEFILE) > $@
+	$(M4) -D $(SUBMODULE_MACRO_NAME)=$(@:%/makefile=%) $(SUBMODULE_MAKEFILE) > $@
 
 -include $(DEP_FILES)
 
