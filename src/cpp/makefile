@@ -10,10 +10,12 @@ MODULE_FILES := $(filter-out $(DIRS),$(patsubst %/.,%,$(wildcard */.)))
 MODULE_MAKEFILES := $(MODULE_FILES:%=%/makefile)
 LIB_FILES := $(foreach f,$(MODULE_FILES),$f/$f.a)
 
-SUBMODULE_MAKEFILE: submodule.mk
+SUBMODULE_MAKEFILE := submodule.mk
+
+INCLUDE_FLAGS := $(INCLUDE_DIRS:%=-I%)
 
 LD_FLAGS :=
-CXX_FLAGS := -std=c++17 -Wall -Wextra -pedantic -MMD -O2 $(INCLUDE_DIRS:%=-I%)
+CXX_FLAGS := -std=c++17 -Wall -Wextra -pedantic -MMD -O2
 CXX := g++
 CPP := gcc -E
 AR := ar
@@ -30,7 +32,7 @@ $(NAME).a: $(OBJ_FILES) $(LIB_FILES)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(OBJ_DIR)
-	$(CXX) $(CXX_FLAGS) -c -o $@ $<
+	$(CXX) $(CXX_FLAGS) $(INCLUDE_FLAGS) -c -o $@ $<
 
 clean: $(MODULE_FILES:%=%.clean)
 	@$(foreach f,$(NAME) $(NAME).a $(OBJ_DIR) $(MODULE_MAKEFILES),[[ -e $f ]] && rm -r $f && echo rm -r $f || true;)
