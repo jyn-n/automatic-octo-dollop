@@ -47,7 +47,7 @@ $(NAME): $(BUILD_INL_FILES) $(BUILD_HPP_FILES) $(BUILD_LIB_FILES) $(OBJ_FILES)
 
 $(LIB_NAME): $(BUILD_INL_FILES) $(BUILD_HPP_FILES) $(BUILD_LIB_FILES) $(OBJ_FILES)
 	@mkdir -p $(BUILD_LIB_DIR)
-	@$(AR) $(AR_FLAGS) $@ $(filter $?,$(OBJ_FILES)) $(LIB_FILES)
+	$(AR) $(AR_FLAGS) $@ $(filter $?,$(OBJ_FILES)) $(LIB_FILES)
 
 $(BUILD_OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(BUILD_OBJ_DIR)
@@ -62,7 +62,9 @@ $(BUILD_INCLUDE_DIR)/%.inl: $(INL_DIR)/%.inl
 	cp $< $@
 
 clean: $(MODULE_FILES:%=%.clean)
-	@$(foreach f,$(NAME) $(LIB_NAME) $(BUILD_OBJ_FILES) $(BUILD_DIR) $(MODULE_MAKEFILES),[[ -e $f ]] && rm -r $f && echo rm -r $f || true;)
+	@#if using separate BUILD_LIB_DIR and BUILD_OBJ_DIR remember to remove both here
+	@$(foreach f,$(NAME) $(LIB_NAME) $(OBJ_FILES) $(DEP_FILES) $(MODULE_MAKEFILES) $(BUILD_HPP_FILES) $(BUILD_INL_FILES),$(if $(wildcard $f),echo rm $f && rm $f,true);)
+	@$(foreach f,$(BUILD_OBJ_DIR) $(BUILD_INCLUDE_DIR) $(BUILD_DIR),$(if $(wildcard $f),echo rm -d $f && rm -d $f,true);)
 
 
 $(MODULE_MAKEFILES): $(SUBMODULE_MAKEFILE)

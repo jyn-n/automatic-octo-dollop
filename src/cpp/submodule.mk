@@ -36,7 +36,7 @@ $(DIR__-NAME): $(DIR__-BUILD_INL_FILES) $(DIR__-BUILD_HPP_FILES) $(DIR__-BUILD_L
 
 $(DIR__-LIB_NAME): $(DIR__-BUILD_INL_FILES) $(DIR__-BUILD_HPP_FILES) $(DIR__-BUILD_LIB_FILES) $(DIR__-OBJ_FILES)
 	@mkdir -p $(DIR__-BUILD_LIB_DIR)
-	@$(AR) $(AR_FLAGS) $@ $(filter $?,$(DIR__-OBJ_FILES)) $(DIR__-BUILD_LIB_FILES)
+	$(AR) $(AR_FLAGS) $@ $(filter $?,$(DIR__-OBJ_FILES)) $(DIR__-BUILD_LIB_FILES)
 
 $(DIR__-BUILD_OBJ_DIR)/%.o: $(DIR__-SRC_DIR)/%.cpp
 	@mkdir -p $(DIR__-BUILD_OBJ_DIR)
@@ -51,7 +51,8 @@ $(DIR__-BUILD_INCLUDE_DIR)/%.inl: $(DIR__-INL_DIR)/%.inl
 	cp $< $@
 
 DIR__.clean: $(DIR__-MODULE_FILES:%=%.clean)
-	@$(foreach f,$(DIR__-NAME) $(DIR__-LIB_NAME) $(DIR__-BUILD_OBJ_DIR) $(DIR__-MODULE_MAKEFILES),[[ -e $f ]] && rm -r $f && echo rm -r $f || true;)
+	@$(foreach f,$(DIR__-NAME) $(DIR__-LIB_NAME) $(DIR__-OBJ_FILES) $(DIR__-DEP_FILES) $(DIR__-MODULE_MAKEFILES) $(DIR__-BUILD_HPP_FILES) $(DIR__-BUILD_INL_FILES),$(if $(wildcard $f),echo rm $f && rm $f,true);)
+	@$(foreach f,$(DIR__-BUILD_OBJ_DIR) $(DIR__-BUILD_INCLUDE_DIR) $(DIR__-BUILD_DIR),$(if $(wildcard $f),echo rm -d $f && rm -d $f,true);)
 
 
 $(DIR__-MODULE_MAKEFILES): $(SUBMODULE_MAKEFILE)

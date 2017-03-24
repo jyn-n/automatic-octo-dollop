@@ -23,12 +23,6 @@ std::ostream & operator<< ( std::ostream & out , std::pair<First,Second> const &
 	return out << '(' << pair.first << ',' << pair.second << ')';
 }
 
-template < typename RNG >
-void foo ( RNG && rng )
-{
-	std::cout << rng() << '\n';
-}
-
 int main () {
 
 	std::random_device seed;
@@ -62,8 +56,6 @@ int main () {
 
 	print ( world.at(s1) );
 	print ( world.at(s2) );
-
-	for (int i = 0; i != 10; ++i) foo (rng);
 
 	return 0;
 }
