@@ -5,7 +5,7 @@ LD_FLAGS ?=
 CXX_FLAGS ?= -std=c++17 -Wall -Wextra -pedantic -MMD -O2
 CXX ?= g++
 AR ?= ar
-AR_FLAGS ?= rvT
+AR_FLAGS ?= crvT
 M4 ?= m4
 SED ?= sed
 MKDIR ?= mkdir
@@ -17,21 +17,18 @@ all: $(NAME)
 TEMPLATE_MAKEFILE := template.mk
 TEMPLATE_MACRO_NAME := DIR__
 
-BUILD_DIR := build
-BUILD_INCLUDE_DIR := $(BUILD_DIR)/include
-BUILD_OBJ_DIR := $(BUILD_DIR)/obj
+BUILD_DIR := build/
+BUILD_INCLUDE_DIR := $(BUILD_DIR)include/
+BUILD_OBJ_DIR := $(BUILD_DIR)obj/
 
-BASE_MAKEFILE := $(BUILD_DIR)/makefile
+BASE_MAKEFILE := $(BUILD_DIR)makefile
 
 DIR_GUARD=$(if $(wildcard $(@D)),,$(MKDIR) -p $(@D))
 
 $(BASE_MAKEFILE): $(TEMPLATE_MAKEFILE)
 	$(DIR_GUARD)
 	$(M4) -D $(TEMPLATE_MACRO_NAME)= $(TEMPLATE_MAKEFILE) > $@
-	$(SED) -i -e 's/$$(-HERE)\///g' -e 's/\/$$(-HERE)//g' $@
-
-#$(BUILD_DIR):
-#	$(MKDIR) $@
+	$(SED) -i -e 's/$$(-HERE)\///g' -e 's/\/$$(-HERE)//g' -e 's/-HERE := \//-HERE :=/' $@
 
 -NAME := $(NAME)
 
@@ -43,4 +40,9 @@ clean_base_makefile:
 .PHONY: all clean clean_base_makefile
 
 include $(BASE_MAKEFILE)
+
+foo:
+	@echo $(-NAME)
+	@echo $(core-NAME)
+	@echo $(core-ARCHIVE_NAME)
 
