@@ -18,7 +18,7 @@ DIR__-DIRS := $(BUILD_DIR) $(DIR__-INCLUDE_DIRS) $(DIR__-SRC_DIR) $(DIR__-BUILD_
 DIR__-BASE_DIRS := $(foreach f,$(DIR__-INCLUDE_DIRS),$(notdir $f))
 
 DIR__-MODULE_FILES := $(filter-out $(DIR__-DIRS),$(patsubst %/.,%/,$(wildcard $(DIR__-HERE)*/.)))
-DIR__-MODULE_MAKEFILES := $(DIR__-MODULE_FILES:%/=$(DIR__-BUILD_DIR)%.mk)
+DIR__-MODULE_MAKEFILES := $(DIR__-MODULE_FILES:%/=$(BUILD_DIR)%.mk)
 
 DIR__-MODULE_BUILD_DIRS := $(foreach f,$(DIR__-MODULE_FILES),$(DIR__-BUILD_DIR)$f)
 
@@ -63,7 +63,8 @@ DIR__.clean: $(DIR__-MODULE_FILES:%/=%.clean)
 
 
 $(DIR__-MODULE_MAKEFILES): $(TEMPLATE_MAKEFILE)
-	$(M4) -D $(TEMPLATE_MACRO_NAME)=$(notdir $(@:%.mk=%)) $(TEMPLATE_MAKEFILE) > $@
+	$(DIR_GUARD)
+	$(M4) -D $(TEMPLATE_MACRO_NAME)=$(@:$(BUILD_DIR)%.mk=%) $(TEMPLATE_MAKEFILE) > $@
 
 -include $(DIR__-DEP_FILES)
 
