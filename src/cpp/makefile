@@ -23,7 +23,7 @@ BUILD_OBJ_DIR := $(BUILD_DIR)/obj
 
 BASE_MAKEFILE := $(BUILD_DIR)/makefile
 
-DIR_GUARD=@$(MKDIR) -p $(@D)
+DIR_GUARD=$(if $(wildcard $(@D)),,$(MKDIR) -p $(@D))
 
 $(BASE_MAKEFILE): $(TEMPLATE_MAKEFILE)
 	$(DIR_GUARD)
