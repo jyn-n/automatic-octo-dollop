@@ -1,5 +1,6 @@
 
 #include "core/cardworld.hpp"
+#include "common/event_manager.hpp"
 
 #include <iostream>
 
@@ -21,6 +22,11 @@ template < typename First , typename Second >
 std::ostream & operator<< ( std::ostream & out , std::pair<First,Second> const & pair )
 {
 	return out << '(' << pair.first << ',' << pair.second << ')';
+}
+
+void baz ( event_context & )
+{
+	std::cout << "baz\n";
 }
 
 int main () {
@@ -56,6 +62,16 @@ int main () {
 
 	print ( world.at(s1) );
 	print ( world.at(s2) );
+
+	event_manager event;
+	event.register_event ( "foo" , [](event_context &){ std::cout << "foo\n"; } );
+	event.register_event ( "foo" , [](event_context &){ std::cout << "bar\n"; } );
+	event.register_event ( "foo" , baz );
+
+	event_context context;
+
+	event ( "foo" , context );
+	baz ( context );
 
 	return 0;
 }

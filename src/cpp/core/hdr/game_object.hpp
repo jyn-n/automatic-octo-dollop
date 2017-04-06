@@ -5,7 +5,7 @@
 #include <string>
 #include <map>
 
-#include "id_factory.hpp"
+#include "common/id_factory.hpp"
 
 class game_object {
 
