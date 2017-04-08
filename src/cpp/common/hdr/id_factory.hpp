@@ -4,6 +4,8 @@
 
 #include <set>
 
+namespace common {
+
 template < typename T >
 class id_factory {
 
@@ -27,6 +29,8 @@ class id_factory {
 		this_type & free ( id_type id );
 
 };
+
+}
 
 #include "id_factory.inl"
 

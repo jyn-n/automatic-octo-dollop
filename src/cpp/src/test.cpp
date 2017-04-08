@@ -13,7 +13,7 @@ void print ( T const & t )
 	std::cout << '\n';
 }
 
-std::ostream & operator<< ( std::ostream & out , game_object const & obj )
+std::ostream & operator<< ( std::ostream & out , core::game_object const & obj )
 {
 	return out << obj.id();
 }
@@ -24,9 +24,12 @@ std::ostream & operator<< ( std::ostream & out , std::pair<First,Second> const &
 	return out << '(' << pair.first << ',' << pair.second << ')';
 }
 
-void baz ( event_context & )
+using event_context = int;
+
+void baz ( event_context & c )
 {
-	std::cout << "baz\n";
+	std::cout << c << '\n';
+	c = 2;
 }
 
 int main () {
@@ -34,24 +37,24 @@ int main () {
 	std::random_device seed;
 	std::mt19937_64 rng { seed () };
 
-	game_object::object_base_type b;
+	core::game_object::object_base_type b;
 
-	cardworld world;
+	core::cardworld world;
 
-	cardworld::stack_location s1 { "foo" , "bar" } ;
-	cardworld::stack_location s2 { "foo" , "quux" } ;
+	core::cardworld::stack_location s1 { "foo" , "bar" } ;
+	core::cardworld::stack_location s2 { "foo" , "quux" } ;
 
 	world[s1];
 	world[s2];
 
-	auto l = world.insert ( s1 , game_object (b) );
+	auto l = world.insert ( s1 , core::game_object (b) );
 	world.move ( l , s2 );
 
-	world.insert ( s2 , game_object (b) );
-	world.insert ( s2 , game_object (b) );
-	world.insert ( s2 , game_object (b) );
-	world.insert ( s2 , game_object (b) );
-	world.insert ( s2 , game_object (b) );
+	world.insert ( s2 , core::game_object (b) );
+	world.insert ( s2 , core::game_object (b) );
+	world.insert ( s2 , core::game_object (b) );
+	world.insert ( s2 , core::game_object (b) );
+	world.insert ( s2 , core::game_object (b) );
 
 	world[s2].shuffle(rng);
 
@@ -63,12 +66,12 @@ int main () {
 	print ( world.at(s1) );
 	print ( world.at(s2) );
 
-	event_manager event;
+	common::event_manager<event_context> event;
 	event.register_event ( "foo" , [](event_context &){ std::cout << "foo\n"; } );
 	event.register_event ( "foo" , [](event_context &){ std::cout << "bar\n"; } );
 	event.register_event ( "foo" , baz );
 
-	event_context context;
+	event_context context = 1;
 
 	event ( "foo" , context );
 	baz ( context );

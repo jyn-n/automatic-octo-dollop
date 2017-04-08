@@ -7,6 +7,8 @@
 
 #include "common/id_factory.hpp"
 
+namespace core {
+
 class game_object {
 
 	public:
@@ -22,7 +24,7 @@ class game_object {
 	private:
 
 		using container_type = std::map < key_type , value_type >;
-		using id_factory_type = id_factory < id_type >;
+		using id_factory_type = common::id_factory < id_type >;
 
 		object_base_type const & _base;
 		container_type _attributes;
@@ -48,6 +50,8 @@ class game_object {
 		id_type const & id () const;
 
 };
+
+}
 
 #endif
 

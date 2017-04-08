@@ -1,4 +1,5 @@
 
+namespace common {
 
 template < typename T >
 inline
@@ -32,5 +33,7 @@ auto id_factory<T>::free ( id_type id ) -> this_type &
 		--_current;
 	}
 	return *this;
+}
+
 }
 

@@ -1,4 +1,6 @@
 
+namespace core {
+
 template < typename Base , typename Value >
 cardstack::basic_iterator<Base,Value>::basic_iterator ( base_type & base , iterator_type const & iterator )
 : _base ( base )
@@ -33,5 +35,7 @@ inline
 auto cardstack::basic_iterator<Base,Value>::operator!= ( this_type const & rhs ) const -> bool 
 {
 	return _iterator != rhs._iterator;
+}
+
 }
 

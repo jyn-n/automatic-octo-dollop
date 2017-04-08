@@ -4,6 +4,8 @@
 #include "cardworld_stack_location.hpp"
 #include "cardworld_card_location.hpp"
 
+namespace core {
+
 auto cardworld::stack () -> cardstack_type & 
 {
 	return _stack;
@@ -16,13 +18,13 @@ auto cardworld::stack () const -> cardstack_type const &
 
 auto cardworld::operator[] ( stack_location const & location ) -> cardstack_type & 
 {
-	auto range = make_range ( location );
+	auto range = common::make_range ( location );
 	return (*this) [ range ];
 }
 
 auto cardworld::at ( stack_location const & location ) const -> cardstack_type const & 
 {
-	auto range = make_range ( location );
+	auto range = common::make_range ( location );
 	return at ( range );
 }
 
@@ -59,5 +61,7 @@ auto cardworld::move ( card_location const & origin , stack_location const & des
 auto cardworld::move ( stack_location const & origin , order_type const & position , stack_location const & destination ) -> card_location 
 {
 	return insert ( destination , erase ( origin , position ) );
+}
+
 }
 

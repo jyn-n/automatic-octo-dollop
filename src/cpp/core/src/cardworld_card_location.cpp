@@ -1,6 +1,7 @@
 
 #include "cardworld_card_location.hpp"
 
+namespace core {
 
 cardworld::card_location::card_location ( stack_location const & stack , key_type const & card )
 : _stack ( stack )
@@ -16,5 +17,7 @@ auto cardworld::card_location::stack () const -> stack_location const &
 auto cardworld::card_location::card () const -> key_type const & 
 {
 	return _card;
+}
+
 }
 

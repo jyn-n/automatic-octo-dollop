@@ -4,6 +4,8 @@
 
 #include "cardstack.hpp"
 
+namespace core {
+
 template < typename Base , typename Value >
 class cardstack::basic_iterator {
 
@@ -35,6 +37,8 @@ class cardstack::basic_iterator {
 		bool operator== ( this_type const & rhs ) const;
 		bool operator!= ( this_type const & rhs ) const;
 };
+
+}
 
 #include "cardstack_basic_iterator.inl"
 

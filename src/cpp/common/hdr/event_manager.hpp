@@ -2,19 +2,20 @@
 #ifndef EVENT_MANAGER_HPP
 #define EVENT_MANAGER_HPP
 
-#include "event_context.hpp"
-
 #include <functional>
 #include <map>
 #include <vector>
 
+namespace common {
+
+template < typename Event_Context >
 class event_manager {
 
 	public:
 
-		using event_context_type = event_context;
+		using event_context_type = Event_Context;
 		using event_type = std::function < void (event_context_type &) >;
-		using this_type = event_manager;
+		using this_type = event_manager<Event_Context>;
 		using key_type = std::string;
 
 	private:
@@ -33,6 +34,10 @@ class event_manager {
 		this_type & operator() ( key_type const & key , event_context_type & context );
 
 };
+
+}
+
+#include "event_manager.inl"
 
 #endif
 

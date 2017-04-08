@@ -1,6 +1,8 @@
 
 #include "game_object.hpp"
 
+namespace core {
+
 game_object::id_factory_type game_object::_id_factory {};
 
 game_object::game_object ( object_base_type const & base )
@@ -49,5 +51,7 @@ auto game_object::operator[] ( key_type const & key ) -> value_type &
 auto game_object::id () const -> id_type const & 
 {
 	return _id;
+}
+
 }
 

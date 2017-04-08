@@ -1,4 +1,6 @@
 
+namespace common {
+
 template < typename Begin , typename End >
 inline
 iterator_range<Begin,End>::iterator_range ( begin_type const & begin , end_type const & end )
@@ -55,5 +57,7 @@ template < typename T >
 auto make_range ( T const & t ) -> iterator_range < decltype (std::begin(t)) , decltype (std::end(t)) >
 {
 	return iterator_range <decltype(std::begin(t)),decltype(std::end(t))> (t);
+}
+
 }
 

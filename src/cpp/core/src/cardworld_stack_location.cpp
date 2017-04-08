@@ -3,6 +3,8 @@
 
 #include "cardworld_stack_location.hpp"
 
+namespace core {
+
 cardworld::stack_location::stack_location ( container_type const & items )
 : _items ( items )
 {
@@ -26,5 +28,7 @@ auto cardworld::stack_location::begin () const -> const_iterator
 auto cardworld::stack_location::end () const -> const_iterator 
 {
 	return _items.end ();
+}
+
 }
 

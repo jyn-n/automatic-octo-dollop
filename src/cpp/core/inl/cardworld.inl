@@ -1,6 +1,8 @@
 
 #include "common/iterator_range.hpp"
 
+namespace core {
+
 template < typename Begin , typename End = Begin >
 inline
 auto cardworld::operator[] ( iterator_range<Begin,End> & range ) -> cardstack_type & 
@@ -19,5 +21,7 @@ auto cardworld::at ( iterator_range<Begin,End> & range ) const -> cardstack_type
 	auto & child = _children.at ( *range.begin() );
 	++range.begin();
 	return child.at ( range );
+}
+
 }
 

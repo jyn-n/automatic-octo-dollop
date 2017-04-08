@@ -8,6 +8,8 @@
 
 #include "game_object.hpp"
 
+namespace core {
+
 class cardstack {
 
 	public:
@@ -63,9 +65,12 @@ class cardstack {
 		this_type & shuffle ( Rng && rng );
 };
 
+}
+
 #include "cardstack_basic_iterator.hpp"
 
 #include "cardstack.inl"
+
 
 #endif
 

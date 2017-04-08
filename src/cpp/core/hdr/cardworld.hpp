@@ -4,8 +4,14 @@
 
 #include "cardstack.hpp"
 
+namespace common {
+
 template < typename Begin , typename End >
 class iterator_range;
+
+}
+
+namespace core {
 
 class cardworld {
 
@@ -17,6 +23,9 @@ class cardworld {
 
 		using card_type = cardstack_type::value_type;
 		using order_type = cardstack_type::order_type;
+
+		template < typename Begin , typename End >
+		using iterator_range = common::iterator_range<Begin,End>;
 
 		class stack_location;
 		class card_location;
@@ -55,6 +64,8 @@ class cardworld {
 		template < typename Begin , typename End = Begin >
 		cardstack_type const & at ( iterator_range<Begin,End> & range ) const;
 };
+
+}
 
 #include "cardworld.inl"
 

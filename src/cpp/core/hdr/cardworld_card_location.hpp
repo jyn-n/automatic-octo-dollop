@@ -5,6 +5,8 @@
 #include "cardworld_stack_location.hpp"
 #include "cardworld.hpp"
 
+namespace core {
+
 class cardworld::card_location {
 
 	private:
@@ -19,6 +21,8 @@ class cardworld::card_location {
 		stack_location const & stack () const;
 		key_type const & card () const;
 };
+
+}
 
 #endif
 

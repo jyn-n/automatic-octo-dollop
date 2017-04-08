@@ -1,6 +1,8 @@
 
 #include "cardstack.hpp"
 
+namespace core {
+
 auto cardstack::size () const -> size_type 
 {
 	return _cards.size();
@@ -79,5 +81,7 @@ auto cardstack::erase ( order_type const & position ) -> value_type
 {
 	auto key = _order [ position ];
 	return erase ( key );
+}
+
 }
 

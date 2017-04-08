@@ -6,6 +6,8 @@
 
 #include "cardworld.hpp"
 
+namespace core {
+
 class cardworld::stack_location {
 
 	private:
@@ -24,6 +26,8 @@ class cardworld::stack_location {
 		const_iterator begin () const;
 		const_iterator end () const;
 };
+
+}
 
 #endif
 
