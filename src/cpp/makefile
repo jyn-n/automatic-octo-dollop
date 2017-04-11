@@ -1,8 +1,8 @@
 
 NAME := cardgame
 
-LD_FLAGS ?=
-CXX_FLAGS ?= -std=c++17 -Wall -Wextra -pedantic -MMD -O2
+LD_FLAGS +=
+CXX_FLAGS += -std=c++17 -Wall -Wextra -pedantic -MMD -O2
 CXX ?= g++
 AR ?= ar
 AR_FLAGS ?= crvT

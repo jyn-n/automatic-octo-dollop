@@ -22,7 +22,7 @@ template < typename Begin , typename End >
 inline
 auto iterator_range<Begin,End>::begin () const -> begin_type 
 {
-	return begin;
+	return _begin;
 }
 
 template < typename Begin , typename End >
@@ -36,7 +36,7 @@ template < typename Begin , typename End >
 inline
 auto iterator_range<Begin,End>::end () const -> end_type 
 {
-	return end;
+	return _end;
 }
 
 template < typename Begin , typename End >
