@@ -42,7 +42,7 @@ class enum_class {
 
 		virtual ~enum_class ();
 
-		operator value_type () const;
+//		operator value_type () const;
 		operator value_type const & () const;
 
 		static const_iterator begin ();

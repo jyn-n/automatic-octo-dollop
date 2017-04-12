@@ -7,19 +7,24 @@
 
 namespace core {
 
+template < typename T , typename >
 class cardworld::card_location {
+
+	public:
+
+		using card_reference_type = T;
 
 	private:
 
 		stack_location _stack;
-		key_type _card;
+		card_reference_type _card;
 
 	public:
 
-		card_location ( stack_location const & stack , key_type const & card );
+		card_location ( stack_location const & stack , card_reference_type const & card );
 
 		stack_location const & stack () const;
-		key_type const & card () const;
+		card_reference_type const & card () const;
 };
 
 }

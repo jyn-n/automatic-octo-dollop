@@ -28,7 +28,25 @@ class cardworld {
 		using iterator_range = common::iterator_range<Begin,End>;
 
 		class stack_location;
+
+		template
+		< typename T 
+		, typename = typename std::enable_if
+			<  std::is_same < T , cardworld::key_type >::value
+			|| std::is_same < T , cardworld::order_type >::value
+			>::type
+		>
 		class card_location;
+
+		template
+		< typename T 
+		, typename = typename std::enable_if
+			<  std::is_same < T , cardworld::key_type >::value
+			|| std::is_same < T , cardworld::order_type >::value
+			>::type
+		>
+		static
+		card_location<T> make_card_location ( stack_location const & stack , T const & t );
 
 	private:
 
@@ -47,14 +65,43 @@ class cardworld {
 		cardstack_type & operator[] ( stack_location const & location );
 		cardstack_type const & at ( stack_location const & location ) const;
 
-		card_type & operator[] ( card_location const & location );
-		card_type const & at ( card_location const & location ) const;
+		template
+		< typename T 
+		, typename = typename std::enable_if
+			<  std::is_same < T , key_type >::value
+			|| std::is_same < T , order_type >::value
+			>::type
+		>
 
-		card_location insert ( stack_location const & destination , game_object && card );
-		game_object erase ( card_location const & location );
-		game_object erase ( stack_location const & location , order_type const & position );
-		card_location move ( card_location const & origin , stack_location const & destination );
-		card_location move ( stack_location const & origin , order_type const & position , stack_location const & destination );
+		card_type & operator[] ( card_location<T> const & location );
+		template
+		< typename T 
+		, typename = typename std::enable_if
+			<  std::is_same < T , key_type >::value
+			|| std::is_same < T , order_type >::value
+			>::type
+		>
+		card_type const & at ( card_location<T> const & location ) const;
+
+		card_location < key_type > insert ( stack_location const & destination , game_object && card );
+
+		template
+		< typename T 
+		, typename = typename std::enable_if
+			<  std::is_same < T , key_type >::value
+			|| std::is_same < T , order_type >::value
+			>::type
+		>
+		game_object erase ( card_location<T> const & location );
+
+		template
+		< typename T 
+		, typename = typename std::enable_if
+			<  std::is_same < T , key_type >::value
+			|| std::is_same < T , order_type >::value
+			>::type
+		>
+		card_location < key_type > move ( card_location<T> const & origin , stack_location const & destination );
 
 	private:
 

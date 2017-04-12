@@ -6,6 +6,15 @@
 
 namespace core {
 
+template < typename T , typename >
+auto cardworld::make_card_location ( stack_location const & stack , T const & t ) -> card_location<T> 
+{
+	return card_location<T> ( stack , t );
+}
+
+template auto cardworld::make_card_location<cardworld::key_type> ( stack_location const & stack , key_type const & t ) -> card_location<key_type>;
+template auto cardworld::make_card_location<cardworld::order_type> ( stack_location const & stack , order_type const & t ) -> card_location<order_type>;
+
 auto cardworld::stack () -> cardstack_type & 
 {
 	return _stack;
@@ -28,40 +37,46 @@ auto cardworld::at ( stack_location const & location ) const -> cardstack_type c
 	return at ( range );
 }
 
-auto cardworld::operator[] ( card_location const & location ) -> card_type & 
+template < typename T , typename >
+auto cardworld::operator[] ( card_location<T> const & location ) -> card_type & 
 {
 	return (*this) [ location.stack() ] [ location.card() ];
 }
 
-auto cardworld::at ( card_location const & location ) const -> card_type const & 
+template auto cardworld::operator[]<cardworld::key_type> ( card_location <key_type> const & ) -> card_type &;
+template auto cardworld::operator[]<cardworld::order_type> ( card_location <order_type> const & ) -> card_type &;
+
+template < typename T , typename >
+auto cardworld::at ( card_location<T> const & location ) const -> card_type const & 
 {
 	return at ( location.stack() ) [ location.card() ];
 }
 
-auto cardworld::insert ( stack_location const & destination , game_object && card ) -> card_location 
+template auto cardworld::at<cardworld::key_type> ( card_location <key_type> const & ) const -> card_type const &;
+template auto cardworld::at<cardworld::order_type> ( card_location <order_type> const & ) const -> card_type const &;
+
+auto cardworld::insert ( stack_location const & destination , game_object && card ) -> card_location < key_type >
 {
-	return card_location ( destination , (*this) [ destination ].insert ( std::move (card) ) );
+	return card_location < key_type > ( destination , (*this) [ destination ].insert ( std::move (card) ) );
 }
 
-auto cardworld::erase ( card_location const & location ) -> game_object 
+template < typename T , typename E >
+auto cardworld::erase ( card_location<T> const & location ) -> game_object 
 {
 	return (*this) [ location.stack() ].erase ( location.card() );
 }
 
-auto cardworld::erase ( stack_location const & location , order_type const & position ) -> game_object 
-{
-	return (*this) [ location ].erase ( position );
-}
+template auto cardworld::erase<cardworld::key_type> ( card_location<key_type> const & location ) -> game_object;
+template auto cardworld::erase<cardworld::order_type> ( card_location<order_type> const & location ) -> game_object;
 
-auto cardworld::move ( card_location const & origin , stack_location const & destination ) -> card_location 
+template < typename T , typename E >
+auto cardworld::move ( card_location<T> const & origin , stack_location const & destination ) -> card_location < key_type >
 {
 	return insert ( destination , erase ( origin ) );
 }
 
-auto cardworld::move ( stack_location const & origin , order_type const & position , stack_location const & destination ) -> card_location 
-{
-	return insert ( destination , erase ( origin , position ) );
-}
+template auto cardworld::move<cardworld::key_type> ( card_location<key_type> const & origin , stack_location const & destination ) -> card_location < key_type >;
+template auto cardworld::move<cardworld::order_type> ( card_location<order_type> const & origin , stack_location const & destination ) -> card_location < key_type >;
 
 }
 

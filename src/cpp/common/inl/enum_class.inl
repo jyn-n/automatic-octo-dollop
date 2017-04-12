@@ -14,13 +14,13 @@ template < typename T , typename B >
 enum_class<T,B>::~enum_class ()
 {
 }
-
+/*
 template < typename T , typename B >
 enum_class<T,B>::operator value_type () const
 {
 	return _value;
 }
-
+*/
 template < typename T , typename B >
 enum_class<T,B>::operator value_type const & () const
 {

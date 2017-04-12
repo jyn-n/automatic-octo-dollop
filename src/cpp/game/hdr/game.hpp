@@ -2,18 +2,18 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-//#include "core/game_object.hpp"
-//#include "core/cardworld.hpp"
+#include "core/game_object.hpp"
+#include "core/cardworld.hpp"
 
-//#include "common/event_manager.hpp"
+#include "common/event_manager.hpp"
 
-//#include "location.hpp"
-//#include "player_location.hpp"
+#include "location.hpp"
+#include "player_location.hpp"
 
 #include <map>
 
 namespace game {
-/*
+
 class event_context;
 
 class game {
@@ -39,7 +39,7 @@ class game {
 	public:
 
 		using stack_location_type = cardworld_type::stack_location;
-		using card_location_type = cardworld_type::card_location;
+		//using card_location_type = cardworld_type::card_location;
 
 	private:
 
@@ -63,7 +63,7 @@ class game {
 		this_type & create_locations ();
 
 };
-*/
+
 }
 
 #endif

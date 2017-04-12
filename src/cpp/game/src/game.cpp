@@ -1,12 +1,12 @@
 
 #include "game.hpp"
 
-//#include "event_context.hpp"
+#include "event_context.hpp"
 
-//#include "common/iterator_range.hpp"
+#include "common/iterator_range.hpp"
 
 namespace game {
-/*
+
 game::game ( event_manager_type & event_manager , count_type const & n_players )
 : _players ()
 , _base_player ()
@@ -51,6 +51,6 @@ auto game::create_locations () -> this_type &
 
 	return *this;
 }
-*/
+
 }
 
