@@ -41,11 +41,3 @@ clean_base_makefile:
 
 include $(BASE_MAKEFILE)
 
-nups:
-	@echo $(foo-HERE)
-	@echo $(foo-MODULE_FILES)
-	@echo $(foo-MODULE_MAKEFILES)
-	@echo $(foo/bar-HERE)
-	@echo $(foo/bar-NAME)
-	@echo $(foo/bar-ARCHIVE_NAME)
-
