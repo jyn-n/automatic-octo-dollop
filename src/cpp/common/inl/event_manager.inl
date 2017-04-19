@@ -4,7 +4,7 @@ namespace common {
 template < typename Key , template < Key key > typename Parameters >
 template < Key key , typename ... Args >
 inline
-auto event_manager<Key,Parameters>::_container () -> std::enable_if_t < std::is_same < compare_list < Args ... > , parameters_t < key > >::value , container_type < Args ... > & >
+auto event_manager<Key,Parameters>::_container () -> std::enable_if_t < std::is_same < typelist < Args ... > , parameters_t < key > >::value , container_type < Args ... > & >
 {
 	static container_type < Args ... > container;
 	return container;
