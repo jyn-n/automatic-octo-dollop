@@ -48,7 +48,7 @@ auto iterator_range<Begin,End>::empty () const -> bool
 
 template < typename Begin , typename End >
 inline
-iterator_range<Begin,End> make_range ( Begin begin , End end )
+iterator_range<std::decay_t<Begin>,std::decay_t<End>> make_range ( Begin begin , End end )
 {
 	return iterator_range < Begin , End > ( begin , end );
 }

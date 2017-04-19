@@ -2,6 +2,8 @@
 #ifndef ITERATOR_RANGE_HPP
 #define ITERATOR_RANGE_HPP
 
+#include <type_traits>
+
 namespace common {
 
 template < typename Begin , typename End = Begin >
@@ -32,7 +34,7 @@ class iterator_range {
 };
 
 template < typename Begin , typename End = Begin >
-iterator_range < Begin , End > make_range ( Begin begin , End end );
+iterator_range < std::decay_t<Begin> , std::decay_t<End> > make_range ( Begin begin , End end );
 
 template < typename T >
 auto make_range ( T const & t ) -> iterator_range < decltype (std::begin(t)) , decltype (std::end(t)) >;
