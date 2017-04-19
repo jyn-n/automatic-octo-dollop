@@ -93,14 +93,14 @@ int main () {
 
 	print ( common::make_range ( game::player_location::begin() , game::player_location::end() ) );
 	print ( common::make_range ( game::location::begin() , game::location::end() ) );
-/*
+
 	{
 		game::player_location q ( "bar" );
 		print ( common::make_range ( game::player_location::begin() , game::player_location::end() ) );
 	}
 
 	print ( common::make_range ( game::player_location::begin() , game::player_location::end() ) );
-*/
+
 	game::player_location p ( "foo" );
 	game::location l ( "bar" );
 
