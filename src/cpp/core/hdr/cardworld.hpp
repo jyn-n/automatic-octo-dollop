@@ -30,21 +30,20 @@ class cardworld {
 		class stack_location;
 
 		template
-		< typename T 
-		, typename = typename std::enable_if
+		< typename T
+		, typename = typename std::enable_if_t
 			<  std::is_same < T , cardworld::key_type >::value
 			|| std::is_same < T , cardworld::order_type >::value
-			>::type
+			>
 		>
 		class card_location;
 
-		template
-		< typename T 
-		, typename = typename std::enable_if
-			<  std::is_same < T , cardworld::key_type >::value
-			|| std::is_same < T , cardworld::order_type >::value
-			>::type
-		>
+		using key_card_location = card_location < key_type >;
+		using order_card_location = card_location < order_type >;
+
+		class any_card_location;
+
+		template < typename T >
 		static
 		card_location<T> make_card_location ( stack_location const & stack , T const & t );
 
@@ -65,43 +64,19 @@ class cardworld {
 		cardstack_type & operator[] ( stack_location const & location );
 		cardstack_type const & at ( stack_location const & location ) const;
 
-		template
-		< typename T 
-		, typename = typename std::enable_if
-			<  std::is_same < T , key_type >::value
-			|| std::is_same < T , order_type >::value
-			>::type
-		>
-
+		template < typename T >
 		card_type & operator[] ( card_location<T> const & location );
-		template
-		< typename T 
-		, typename = typename std::enable_if
-			<  std::is_same < T , key_type >::value
-			|| std::is_same < T , order_type >::value
-			>::type
-		>
+
+		template < typename T >
 		card_type const & at ( card_location<T> const & location ) const;
 
-		card_location < key_type > insert ( stack_location const & destination , game_object && card );
+		key_card_location insert ( stack_location const & destination , game_object && card );
 
-		template
-		< typename T 
-		, typename = typename std::enable_if
-			<  std::is_same < T , key_type >::value
-			|| std::is_same < T , order_type >::value
-			>::type
-		>
+		template < typename T >
 		game_object erase ( card_location<T> const & location );
 
-		template
-		< typename T 
-		, typename = typename std::enable_if
-			<  std::is_same < T , key_type >::value
-			|| std::is_same < T , order_type >::value
-			>::type
-		>
-		card_location < key_type > move ( card_location<T> const & origin , stack_location const & destination );
+		template < typename T >
+		key_card_location move ( card_location<T> const & origin , stack_location const & destination );
 
 	private:
 
