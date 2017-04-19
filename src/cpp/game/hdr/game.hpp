@@ -58,9 +58,9 @@ class game {
 		rng_type & _rng;
 
 		template < typename T >
-		key_card_location_type move ( card_location_type<T> const & origin , stack_location_type const & destination );
-		key_card_location_type move_any ( any_card_location_type const & origin , stack_location_type const & destination );
-		key_card_location_type move ( any_card_location_type const & origin , stack_location_type const & destination );
+		void _move ( card_location_type<T> const & origin , stack_location_type const & destination );
+
+		void move ( any_card_location_type const & origin , stack_location_type const & destination );
 		void reshuffle ( stack_location_type const & origin , stack_location_type const & destination );
 		void reveal ( object_type const & player );
 		void play ( object_type const & player , any_card_location_type const & card );
