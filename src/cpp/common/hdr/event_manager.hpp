@@ -3,36 +3,48 @@
 #define EVENT_MANAGER_HPP
 
 #include <functional>
-#include <map>
 #include <vector>
 
 namespace common {
 
-template < typename Event_Context >
+template < typename ... Args >
+class typelist {
+
+	public:
+
+		typelist() = delete;
+};
+
+template < typename Key , template < Key key > typename Parameters >
 class event_manager {
 
 	public:
 
-		using event_context_type = Event_Context;
-		using event_type = std::function < void (event_context_type &) >;
-		using this_type = event_manager<Event_Context>;
-		using key_type = std::string;
+		using this_type = event_manager<Key , Parameters>;
+
+		template < typename ... Args >
+		using event_type = std::function < void (Args ... args) >;
+
+		using key_type = Key;
 
 	private:
 
-		using event_container_type = std::vector < event_type >;
-		using container_type = std::map < key_type , event_container_type >;
+		template < key_type key >
+		using parameters_t  = typename Parameters < key >::type;
 
-		container_type _events;
+		template < typename ... Args >
+		using container_type = std::vector < event_type < Args ... > >;
+
+		template < key_type key , typename ... Args >
+		std::enable_if_t < std::is_same < typelist < Args ... > , parameters_t < key > >::value , container_type < Args ... > & > _container ();
 
 	public:
 
-		event_manager ();
+		template < key_type key , typename ... Args >
+		this_type & register_event ( event_type<Args...> && event );
 
-		this_type & register_event ( key_type const & key , event_type && value);
-
-		this_type & operator() ( key_type const & key , event_context_type & context );
-
+		template < key_type key , typename ... Args >
+		this_type & operator() ( Args ... args );
 };
 
 }

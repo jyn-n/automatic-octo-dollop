@@ -1,26 +1,33 @@
 
-#include "event_manager.hpp"
-
 namespace common {
 
-template < typename Event_Context >
-event_manager<Event_Context>::event_manager ()
-: _events()
+template < typename Key , template < Key key > typename Parameters >
+template < Key key , typename ... Args >
+inline
+auto event_manager<Key,Parameters>::_container () -> std::enable_if_t < std::is_same < compare_list < Args ... > , parameters_t < key > >::value , container_type < Args ... > & >
 {
+	static container_type < Args ... > container;
+	return container;
 }
 
-template < typename Event_Context >
-auto event_manager<Event_Context>::register_event ( key_type const & key , event_type && value) -> this_type &
+template < typename Key , template < Key key > typename Parameters >
+template < Key key , typename ... Args >
+inline
+auto event_manager<Key,Parameters>::register_event ( event_type<Args...> && event ) -> this_type & 
 {
-	_events [ key ].push_back ( std::move (value) );
+	_container < key , Args ... > () .push_back ( std::move ( event ) );
+
 	return *this;
 }
 
-template < typename Event_Context >
-auto event_manager<Event_Context>::operator() ( key_type const & key , event_context_type & context ) -> this_type &
+template < typename Key , template < Key key > typename Parameters >
+template < Key key , typename ... Args >
+inline
+auto event_manager<Key,Parameters>::operator() ( Args ... args ) -> this_type & 
 {
-	for ( auto & f : _events [ key ] )
-		f ( context );
+	for ( auto & f : _container < key , Args ... > () ) {
+		f ( args ... );
+	}
 
 	return *this;
 }
