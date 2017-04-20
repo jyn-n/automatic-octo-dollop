@@ -25,13 +25,13 @@ enum class event_name
 };
 
 template < event_name name >
-class event_parameter_list;
+struct event_parameter_list;
 
 #ifdef PARAMETER_LIST
 	static_assert ( false );
 #endif
 
-#define PARAMETER_LIST(name,...) template <> class event_parameter_list < event_name::name > { public: event_parameter_list() = delete; using type = common::typelist<__VA_ARGS__>; }
+#define PARAMETER_LIST(name,...) template <> struct event_parameter_list < event_name::name > { event_parameter_list() = delete; using type = common::event_type<__VA_ARGS__>; }
 
 PARAMETER_LIST( move_card , core_types::any_card_location_type const & , core_types::stack_location_type const & ); // origin , destination
 PARAMETER_LIST( reshuffle , core_types::stack_location_type const & , core_types::stack_location_type const & ); // origin , destination

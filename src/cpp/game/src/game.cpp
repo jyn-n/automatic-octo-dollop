@@ -48,15 +48,14 @@ template auto game::_move <game::cardworld_type::order_type> ( card_location_typ
 
 auto game::move ( any_card_location_type const & origin , stack_location_type const & destination ) -> void
 {
-	_event_manager.operator() < event_name::pre_move_card , any_card_location_type const & , stack_location_type const & > ( origin , destination );
+	_event_manager.operator() < event_name::pre_move_card > ( std::cref(origin) , std::cref(destination) );
 
 	if (origin.valid_key())
 		_move ( origin.key() , destination );
 	else
 		_move ( origin.order() , destination );
 
-	_event_manager.operator() < event_name::post_move_card , any_card_location_type const & , stack_location_type const & > ( origin , destination );
-
+	_event_manager.operator() < event_name::post_move_card > ( std::cref(origin) , std::cref(destination));
 }
 
 auto game::reveal ( object_type const & player ) -> void
@@ -66,13 +65,13 @@ auto game::reveal ( object_type const & player ) -> void
 
 auto game::play ( object_type const & player , any_card_location_type const & card ) -> void
 {
-	_event_manager.operator() < event_name::pre_play , object_type const & , any_card_location_type const & > ( player , card );
+	_event_manager.operator()< event_name::pre_play > ( std::cref(player) , std::cref(card) );
 
 	move ( card , PSTACK ( play ) );
 
 	//TODO reveal check
 
-	_event_manager.operator() < event_name::post_play , object_type const & , any_card_location_type const & > ( player , card );
+	_event_manager.operator()< event_name::post_play > ( std::cref(player) , std::cref(card) );
 }
 
 auto game::cleanup_cardplay ( object_type const & player ) -> void
@@ -104,12 +103,12 @@ auto game::move_location ( stack_location_type const & origin , stack_location_t
 
 auto game::register_events () -> this_type &
 {
-	_event_manager.register_event<event_name::reshuffle> ( event_manager_type::event_type < stack_location_type const & , stack_location_type const & > ( std::bind ( &game::reshuffle , this , stdp::_1 , stdp::_2 ) ) );
-	_event_manager.register_event<event_name::move_card> ( event_manager_type::event_type < any_card_location_type const & , stack_location_type const & > ( std::bind ( &game::move , this , stdp::_1 , stdp::_2 ) ) );
-	_event_manager.register_event<event_name::reveal> ( event_manager_type::event_type < object_type const & > ( std::bind ( &game::reveal , this , stdp::_1 ) ) );
-	_event_manager.register_event<event_name::play> ( event_manager_type::event_type < object_type const & , any_card_location_type const & > ( std::bind ( &game::play , this , stdp::_1, stdp::_2 ) ) );
-	_event_manager.register_event<event_name::cleanup_cardplay> ( event_manager_type::event_type < object_type const & > ( std::bind ( &game::cleanup_cardplay , this , stdp::_1 ) ) );
-	_event_manager.register_event<event_name::discard> ( event_manager_type::event_type < object_type const & , any_card_location_type const & > ( std::bind ( &game::discard , this , stdp::_1 , stdp::_2 ) ) );
+	_event_manager.register_event<event_name::reshuffle> ( std::bind ( &game::reshuffle , this , stdp::_1 , stdp::_2 ) );
+	_event_manager.register_event<event_name::move_card> ( std::bind ( &game::move , this , stdp::_1 , stdp::_2 ) );
+	_event_manager.register_event<event_name::reveal> ( std::bind ( &game::reveal , this , stdp::_1 ) );
+	_event_manager.register_event<event_name::play> ( std::bind ( &game::play , this , stdp::_1, stdp::_2 ) );
+	_event_manager.register_event<event_name::cleanup_cardplay> ( std::bind ( &game::cleanup_cardplay , this , stdp::_1 ) );
+	_event_manager.register_event<event_name::discard> ( std::bind ( &game::discard , this , stdp::_1 , stdp::_2 ) );
 
 	return *this;
 }
@@ -148,6 +147,8 @@ auto game::move_top_reshuffling ( stack_location_type const & origin , stack_loc
 
 	return move_top ( origin , destination );
 }
+
+#undef PSTACK
 
 }
 
