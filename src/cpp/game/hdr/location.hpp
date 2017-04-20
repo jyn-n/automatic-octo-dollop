@@ -14,7 +14,7 @@ class location : public common::enum_class < core_types::key_type , location >
 		location ( value_type && value_type );
 		virtual ~location ();
 
-		static location player;
+		static location const player;
 };
 
 bool operator< ( location const & lhs , location const & rhs );
