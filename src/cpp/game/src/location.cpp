@@ -19,7 +19,7 @@ bool operator< ( location const & lhs , location const & rhs )
 	return std::less < location::enum_class_type > () ( lhs , rhs );
 }
 
-location location::player ( "player" );
+location const location::player ( "player" );
 
 }
 
