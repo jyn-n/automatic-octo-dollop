@@ -8,40 +8,31 @@
 namespace common {
 
 template < typename ... Args >
-class typelist {
+using event_type = std::function < void (Args...) >;
 
-	public:
-
-		typelist() = delete;
-};
-
-template < typename Key , template < Key key > typename Parameters >
+template < typename Key , template < Key key > typename Events >
 class event_manager {
 
 	public:
 
-		using this_type = event_manager<Key , Parameters>;
-
-		template < typename ... Args >
-		using event_type = std::function < void (Args ... args) >;
-
+		using this_type = event_manager<Key , Events>;
 		using key_type = Key;
 
 	private:
 
 		template < key_type key >
-		using parameters_t  = typename Parameters < key >::type;
+		using event_type = typename Events < key >::type;
 
-		template < typename ... Args >
-		using container_type = std::vector < event_type < Args ... > >;
+		template < typename T >
+		using container_type = std::vector < T >;
 
-		template < key_type key , typename ... Args >
-		std::enable_if_t < std::is_same < typelist < Args ... > , parameters_t < key > >::value , container_type < Args ... > & > _container ();
+		template < key_type key >
+		container_type < event_type < key > > & _container ();
 
 	public:
 
-		template < key_type key , typename ... Args >
-		this_type & register_event ( event_type<Args...> && event );
+		template < key_type key >
+		this_type & register_event ( event_type<key> && event );
 
 		template < key_type key , typename ... Args >
 		this_type & operator() ( Args ... args );

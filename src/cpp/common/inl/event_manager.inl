@@ -1,31 +1,31 @@
 
 namespace common {
 
-template < typename Key , template < Key key > typename Parameters >
-template < Key key , typename ... Args >
+template < typename Key , template < Key key > typename Events >
+template < Key key >
 inline
-auto event_manager<Key,Parameters>::_container () -> std::enable_if_t < std::is_same < typelist < Args ... > , parameters_t < key > >::value , container_type < Args ... > & >
+auto event_manager<Key,Events>::_container () -> container_type < event_type < key > > &
 {
-	static container_type < Args ... > container;
+	static container_type < event_type < key > > container;
 	return container;
 }
 
-template < typename Key , template < Key key > typename Parameters >
-template < Key key , typename ... Args >
+template < typename Key , template < Key key > typename Events >
+template < Key key >
 inline
-auto event_manager<Key,Parameters>::register_event ( event_type<Args...> && event ) -> this_type & 
+auto event_manager<Key,Events>::register_event ( event_type<key> && event ) -> this_type & 
 {
-	_container < key , Args ... > () .push_back ( std::move ( event ) );
+	_container < key > () .push_back ( std::move ( event ) );
 
 	return *this;
 }
 
-template < typename Key , template < Key key > typename Parameters >
+template < typename Key , template < Key key > typename Events >
 template < Key key , typename ... Args >
 inline
-auto event_manager<Key,Parameters>::operator() ( Args ... args ) -> this_type & 
+auto event_manager<Key,Events>::operator() ( Args ... args ) -> this_type & 
 {
-	for ( auto & f : _container < key , Args ... > () ) {
+	for ( auto & f : _container < key > () ) {
 		f ( args ... );
 	}
 
