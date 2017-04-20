@@ -13,6 +13,7 @@ namespace game {
 		using object_base_type = object_type::object_base_type;
 		using id_type = object_type::id_type;
 		using cardworld_type = core::cardworld;
+		using key_type = cardworld_type::key_type;
 		using stack_location_type = cardworld_type::stack_location;
 		template < typename T >
 		using card_location_type = cardworld_type::card_location<T>;

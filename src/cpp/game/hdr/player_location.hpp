@@ -2,12 +2,12 @@
 #ifndef PLAYER_LOCATION
 #define PLAYER_LOCATION
 
-#include <string>
 #include "common/enum_class.hpp"
+#include "core_types.hpp"
 
 namespace game {
 
-class player_location : public common::enum_class < std::string , player_location >
+class player_location : public common::enum_class < core_types::key_type , player_location >
 {
 	public:
 

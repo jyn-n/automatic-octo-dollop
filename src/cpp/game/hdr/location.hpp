@@ -2,12 +2,12 @@
 #ifndef LOCATION_HPP
 #define LOCATION_HPP
 
-#include <string>
 #include "common/enum_class.hpp"
+#include "core_types.hpp"
 
 namespace game {
 
-class location : public common::enum_class < std::string , location >
+class location : public common::enum_class < core_types::key_type , location >
 {
 	public:
 
