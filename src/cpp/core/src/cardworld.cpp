@@ -55,6 +55,18 @@ auto cardworld::at ( card_location<T> const & location ) const -> card_type cons
 template auto cardworld::at<cardworld::key_type> ( card_location <key_type> const & ) const -> card_type const &;
 template auto cardworld::at<cardworld::order_type> ( card_location <order_type> const & ) const -> card_type const &;
 
+auto cardworld::operator[] ( any_card_location const & location ) -> card_type &
+{
+	if ( location.valid_key() ) return (*this)[location.key()];
+	return (*this)[location.order()];
+}
+
+auto cardworld::at ( any_card_location const & location ) const -> card_type const &
+{
+	if ( location.valid_key() ) return at ( location.key() );
+	return at ( location.order() );
+}
+
 auto cardworld::insert ( stack_location const & destination , game_object && card ) -> key_card_location
 {
 	return card_location < key_type > ( destination , (*this) [ destination ].insert ( std::move (card) ) );

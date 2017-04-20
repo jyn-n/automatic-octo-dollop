@@ -66,9 +66,11 @@ class cardworld {
 
 		template < typename T >
 		card_type & operator[] ( card_location<T> const & location );
-
 		template < typename T >
 		card_type const & at ( card_location<T> const & location ) const;
+
+		card_type & operator[] ( any_card_location const & location );
+		card_type const & at ( any_card_location const & location ) const;
 
 		key_card_location insert ( stack_location const & destination , game_object && card );
 
