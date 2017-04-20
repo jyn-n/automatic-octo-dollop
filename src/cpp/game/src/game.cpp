@@ -3,6 +3,8 @@
 
 #include "common/iterator_range.hpp"
 
+#include "card_attribute.hpp"
+
 namespace game {
 
 namespace stdp = std::placeholders;
@@ -69,7 +71,8 @@ auto game::play ( object_type const & player , any_card_location_type const & ca
 
 	move ( card , PSTACK ( play ) );
 
-	//TODO reveal check
+	for ( auto i = _cardworld [ card ] [ card_attribute::successes ]; i > 0; ++i )
+		reveal ( player );
 
 	_event_manager.operator()< event_name::post_play > ( std::cref(player) , std::cref(card) );
 }
