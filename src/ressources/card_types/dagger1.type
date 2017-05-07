@@ -1,0 +1,12 @@
+!!python/object:common.load._type_file {
+name: dagger1,
+attributes: {
+ title: dagger1,
+ effect: 'DD: Dam 1
+ 
+ I: Move 1 (ignoring zone of control) (x00)',
+ time: 2,
+ check_size: 3,
+ successes: ''
+}
+}

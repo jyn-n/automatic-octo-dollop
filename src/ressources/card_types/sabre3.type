@@ -1,0 +1,10 @@
+!!python/object:common.load._type_file {
+name: sabre3,
+attributes: {
+ title: sabre3,
+ effect: 'S: Dam 1',
+ time: 1,
+ check_size: 1,
+ successes: ''
+}
+}

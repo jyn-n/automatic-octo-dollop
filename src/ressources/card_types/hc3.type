@@ -1,0 +1,14 @@
+!!python/object:common.load._type_file {
+name: hc3,
+attributes: {
+ title: hc3,
+ effect: 'Cycle 1
+ 
+ S: Heal 1 (x2)
+ 
+ D: Cycle 1 (x00)',
+ time: 4,
+ check_size: 5,
+ successes: '-'
+}
+}

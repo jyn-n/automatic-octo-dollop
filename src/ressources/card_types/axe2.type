@@ -1,0 +1,12 @@
+!!python/object:common.load._type_file {
+name: axe2,
+attributes: {
+ title: axe2,
+ effect: 'S: Dam 1
+ 
+ D: Target +1 (x00)',
+ time: 5,
+ check_size: 5,
+ successes: D
+}
+}

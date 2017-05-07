@@ -1,0 +1,20 @@
+{
+deck: {
+ sabre1: 3,
+ sabre2: 3,
+ sabre3: 3,
+ sabre4: 3,
+ sabre5: 3,
+ dodge: 5,
+ move1: 2,
+ move2: 1,
+ move3: 1,
+ move4: 1,
+ s: 4,
+ d: 4,
+ i: 2,
+ ds: 2,
+ is: 2,
+ di: 1
+ }
+}

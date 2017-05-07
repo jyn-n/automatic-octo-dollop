@@ -1,0 +1,12 @@
+!!python/object:common.load._type_file {
+name: hc2,
+attributes: {
+ title: hc2,
+ effect: 'Cycle 1
+ 
+ D: Cycle 1 (x00)',
+ time: 2,
+ check_size: 3,
+ successes: D
+}
+}

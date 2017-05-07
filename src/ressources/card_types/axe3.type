@@ -1,0 +1,12 @@
+!!python/object:common.load._type_file {
+name: axe3,
+attributes: {
+ title: axe3,
+ effect: 'S: Dam 1 (x2)
+ 
+ you can take a card from your hand as damage to add it to the check',
+ time: 3,
+ check_size: 3,
+ successes: '-'
+}
+}

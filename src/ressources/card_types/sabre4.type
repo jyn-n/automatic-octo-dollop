@@ -1,0 +1,16 @@
+!!python/object:common.load._type_file {
+name: sabre4,
+attributes: {
+ title: sabre4,
+ effect: 'S: Dam 1
+ 
+ D: Move 1 (x00)
+ 
+ I: Cycle 1 (x00)
+ 
+ S: Dam 1 (different target)',
+ time: 5,
+ check_size: 5,
+ successes: ''
+}
+}

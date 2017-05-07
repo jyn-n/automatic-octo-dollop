@@ -1,0 +1,18 @@
+!!python/object:common.load._type_file {
+name: move3,
+attributes: {
+ title: move3,
+ effect: 'Reveal a card from your hand
+ 
+ reveal check
+ 
+ D: Move 1
+ 
+ I: Reveal a different card
+ 
+ play the last revealed card using any remaining successes instead of a check',
+ time: 5,
+ check_size: 5,
+ successes: ''
+}
+}

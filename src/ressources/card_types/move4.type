@@ -1,0 +1,12 @@
+!!python/object:common.load._type_file {
+name: move4,
+attributes: {
+ title: move4,
+ effect: 'D: Move 1
+ 
+ BB: Move 1',
+ time: 2,
+ check_size: 5,
+ successes: ''
+}
+}

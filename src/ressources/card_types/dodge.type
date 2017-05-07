@@ -1,0 +1,10 @@
+!!python/object:common.load._type_file {
+name: dodge,
+attributes: {
+ title: dodge,
+ effect: 'cycle: prevent 1 damage',
+ time: 00,
+ check_size: 0,
+ successes: ''
+}
+}

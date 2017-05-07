@@ -1,0 +1,10 @@
+!!python/object:common.load._type_file {
+name: i,
+attributes: {
+ title: '',
+ effect: '',
+ time: 00,
+ check_size: 0,
+ successes: I
+}
+}

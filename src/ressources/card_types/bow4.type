@@ -1,0 +1,16 @@
+!!python/object:common.load._type_file {
+name: bow4,
+attributes: {
+ title: bow4,
+ effect: 'Time +1: Check +1
+ 
+ Range 0
+ 
+ D: +1 Range
+ 
+ Dam 1',
+ time: 5,
+ check_size: 5,
+ successes: ''
+}
+}

@@ -1,0 +1,12 @@
+!!python/object:common.load._type_file {
+name: sabre1,
+attributes: {
+ title: sabre1,
+ effect: 'S: Dam 1
+ 
+ D: Move 1 (ignoring zone of control) (x00)',
+ time: 3,
+ check_size: 3,
+ successes: 'S'
+}
+}
