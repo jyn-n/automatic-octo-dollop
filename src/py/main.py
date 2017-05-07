@@ -17,7 +17,7 @@ g = game(1 , e)
 p = list(g.players())[0]
 
 card_types = load_type_dir ( d.card_types )
-deck = load_deck ( d.decks / 'foo.deck' , card_types )
+deck = load_deck ( d.decks / (sys.argv[1] + '.deck') , card_types )
 g.load_deck ( p , deck )
 g.cardworld() [ g.location ( p , pl.deck ) ].cardstack().shuffle()
 
