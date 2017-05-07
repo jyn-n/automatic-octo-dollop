@@ -7,7 +7,7 @@ attributes: {
  S: Heal 1
  
  D: Cycle 1 (x00)',
- time: 3,
+ time: 2,
  check_size: 3,
  successes: '-'
 }

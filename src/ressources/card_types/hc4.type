@@ -2,7 +2,9 @@
 name: hc4,
 attributes: {
  title: hc4,
- effect: 'Cycle 1',
+ effect: 'Cycle 1
+ 
+ Cycle 1',
  time: 1,
  check_size: 0,
  successes: '-'

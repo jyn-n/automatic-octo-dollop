@@ -5,7 +5,7 @@ attributes: {
  effect: 'Cycle 1
  
  D: Cycle 1 (x00)',
- time: 2,
+ time: 1,
  check_size: 3,
  successes: D
 }
