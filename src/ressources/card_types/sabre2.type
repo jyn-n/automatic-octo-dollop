@@ -4,7 +4,7 @@ attributes: {
  title: sabre2,
  effect: 'S: Dam 1
  
- I: Cycle 1 (x00)',
+ D: Cycle 3',
  time: 3,
  check_size: 3,
  successes: 'D'

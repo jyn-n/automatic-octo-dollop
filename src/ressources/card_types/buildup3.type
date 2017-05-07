@@ -1,12 +1,10 @@
 !!python/object:common.load._type_file {
-name: move4,
+name: buildup3,
 attributes: {
- title: move4,
- effect: 'D: Move 1
- 
- BB: Move 1',
+ title: buildup3,
+ effect: 'S: Heal 2 (x3)',
  time: 2,
- check_size: 5,
+ check_size: 4,
  successes: ''
 }
 }

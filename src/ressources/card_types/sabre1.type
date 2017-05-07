@@ -4,7 +4,7 @@ attributes: {
  title: sabre1,
  effect: 'S: Dam 1
  
- D: Move 1 (ignoring zone of control) (x00)',
+ D: Move 1',
  time: 3,
  check_size: 3,
  successes: 'S'

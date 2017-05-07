@@ -1,9 +1,11 @@
 !!python/object:common.load._type_file {
-name: ds,
+name: move_taunt,
 attributes: {
- title: '',
- effect: '',
- time: 00,
+ title: 'move_taunt',
+ effect: 'Move 1
+
+ Taunt 1',
+ time: 2,
  check_size: 0,
  successes: DS
 }

@@ -2,10 +2,8 @@
 name: axe2,
 attributes: {
  title: axe2,
- effect: 'S: Dam 1
- 
- D: Target +1 (x00)',
- time: 5,
+ effect: 'XS: Move X, Dam (min(x,2)),
+ time: 8,
  check_size: 5,
  successes: D
 }

@@ -2,7 +2,7 @@
 name: bow4,
 attributes: {
  title: bow4,
- effect: 'Time +1: Check +1
+ effect: 'Time +1: Check +1 (x00)
  
  Range 0
  

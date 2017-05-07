@@ -1,10 +1,10 @@
 !!python/object:common.load._type_file {
-name: dd,
+name: heal,
 attributes: {
- title: '',
- effect: '',
- time: 00,
+ title: 'heal',
+ effect: 'Heal 1',
+ time: 1,
  check_size: 0,
- successes: DD
+ successes: S
 }
 }

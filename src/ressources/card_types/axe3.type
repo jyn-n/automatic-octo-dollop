@@ -7,6 +7,6 @@ attributes: {
  you can take a card from your hand as damage to add it to the check',
  time: 3,
  check_size: 3,
- successes: '-'
+ successes: ''
 }
 }

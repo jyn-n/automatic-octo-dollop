@@ -2,9 +2,11 @@
 name: sabre3,
 attributes: {
  title: sabre3,
- effect: 'S: Dam 1',
- time: 1,
- check_size: 1,
+ effect: 'S: Dam 1
+
+ D: Dam 1',
+ time: 4,
+ check_size: 3,
  successes: ''
 }
 }

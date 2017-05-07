@@ -5,6 +5,6 @@ attributes: {
  effect: 'S: Dam 1 (x2)',
  time: 5,
  check_size: 5,
- successes: S
+ successes: ''
 }
 }

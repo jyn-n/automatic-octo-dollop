@@ -3,18 +3,11 @@ deck: {
  bow1: 6,
  bow2: 3,
  bow3: 3,
- bow4: 3,
- dagger1: 3,
- dagger2: 1,
- dagger3: 1,
- move1: 2,
- move2: 1,
- move3: 1,
- move4: 1,
- dd: 1,
- d: 7,
- i: 4,
- di: 2,
- empty: 1
+ bow4: 6,
+ move1: 4,
+ move2: 4,
+ move3: 4,
+ move: 12,
+ dodge: 6
  }
 }

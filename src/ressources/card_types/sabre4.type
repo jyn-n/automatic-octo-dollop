@@ -4,12 +4,10 @@ attributes: {
  title: sabre4,
  effect: 'S: Dam 1
  
- D: Move 1 (x00)
- 
- I: Cycle 1 (x00)
+ D: Move 1 (x2)
  
  S: Dam 1 (different target)',
- time: 5,
+ time: 6,
  check_size: 5,
  successes: ''
 }

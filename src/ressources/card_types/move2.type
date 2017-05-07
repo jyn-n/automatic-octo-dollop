@@ -2,9 +2,11 @@
 name: move2,
 attributes: {
  title: move2,
- effect: 'Move X (ignoring zone of control)',
- time: 2X,
- check_size: 0,
+ effect: 'D: ignore zone of control for this action
+
+ Move 1',
+ time: 1,
+ check_size: 5,
  successes: ''
 }
 }

@@ -4,7 +4,7 @@ attributes: {
  title: axe4,
  effect: 'S: Dam 1 (x2)
  
- D: Target +1 (x00)',
+ S: Target +1 (x00)',
  time: 7,
  check_size: 7,
  successes: '-'

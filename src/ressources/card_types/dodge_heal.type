@@ -1,12 +1,14 @@
 !!python/object:common.load._type_file {
-name: dodge,
+name: dodge_heal,
 attributes: {
- title: 'dodge',
+ title: 'dodge_heal',
  effect: 'play when taking damage
 
- prevent all damage from one source',
+ prevent all damage from one source
+
+ Heal 1',
  time: 1,
  check_size: 0,
- successes: D
+ successes: DS
 }
 }

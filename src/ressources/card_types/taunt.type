@@ -1,10 +1,10 @@
 !!python/object:common.load._type_file {
-name: d,
+name: taunt,
 attributes: {
- title: '',
- effect: '',
- time: 00,
+ title: 'taunt',
+ effect: 'Taunt 1',
+ time: 1,
  check_size: 0,
- successes: D
+ successes: S
 }
 }
