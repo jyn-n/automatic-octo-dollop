@@ -23,6 +23,7 @@ class CardWidget (ui_card_widget , base_class):
 	def show_card ( self ):
 		for label , text in (
 			  (self.label_title , self._card[ ca.title ])
+			, (self.label_title2 , self._card[ ca.title ])
 			, (self.label_effect , self._card[ ca.effect ])
 			, (self.label_check_size , str(self._card[ ca.check_size ]))
 			, (self.label_time , str(self._card[ ca.time ]))
