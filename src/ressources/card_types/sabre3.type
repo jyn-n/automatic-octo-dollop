@@ -7,6 +7,6 @@ attributes: {
  D: Dam 1',
  time: 4,
  check_size: 3,
- successes: ''
+ successes: 'D'
 }
 }

@@ -7,7 +7,7 @@ attributes: {
  prevent all damage from one source
 
  Heal 1',
- time: 1,
+ time: 2,
  check_size: 0,
  successes: DS
 }

@@ -5,6 +5,6 @@ attributes: {
  effect: 'Dam 1',
  time: 4,
  check_size: 0,
- successes: '-'
+ successes: 'D'
 }
 }

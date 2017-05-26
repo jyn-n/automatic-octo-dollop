@@ -7,6 +7,6 @@ attributes: {
  D: Move 1',
  time: 3,
  check_size: 3,
- successes: 'S'
+ successes: ''
 }
 }

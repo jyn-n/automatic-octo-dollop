@@ -7,6 +7,6 @@ attributes: {
  S: Target +1 (x00)',
  time: 7,
  check_size: 7,
- successes: '-'
+ successes: ''
 }
 }
