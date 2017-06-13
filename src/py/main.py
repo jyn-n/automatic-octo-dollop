@@ -29,6 +29,7 @@ mw.stack_reveal.highlighting ( False )
 guiworld = cardworld_gui()
 guiworld [ g.location ( p , pl.hand ) ] = mw.stack_hand
 guiworld [ g.location ( p , pl.reveal ) ] = mw.stack_reveal
+guiworld [ g.location ( p , pl.play ) ] = mw.stack_play
 guiworld.update ( g.cardworld() )
 
 def draw ():

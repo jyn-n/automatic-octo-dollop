@@ -156,16 +156,34 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <zorder>stack_reveal</zorder>
     </widget>
    </item>
    <item row="0" column="0">
-    <widget class="CardlistWidget" name="stack_reveal" native="true">
+    <widget class="QWidget" name="play_container" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="CardlistWidget" name="stack_reveal" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="CardlistWidget" name="stack_play" native="true">
+        <zorder>stack_reveal</zorder>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
   </layout>
