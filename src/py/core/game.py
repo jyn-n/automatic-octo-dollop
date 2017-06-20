@@ -110,6 +110,8 @@ class game:
 		for i in range ( card [ ca.check_size ] ):
 			self._event ( e.reveal , player )
 
+		self.draw ( player )
+
 		self._event ( e.post_play )
 
 	def cleanup_cardplay ( self , player ):
