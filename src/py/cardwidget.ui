@@ -277,7 +277,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>check_size</string>
+               <string>time</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -303,7 +303,7 @@
             <item>
              <widget class="QLabel" name="label_time">
               <property name="text">
-               <string>time</string>
+               <string>check_size</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>

@@ -6,6 +6,6 @@ attributes: {
  time: 1,
  check_size: 0,
  successes: S,
- color: red
+ color: darkRed
 }
 }

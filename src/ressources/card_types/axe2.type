@@ -5,7 +5,7 @@ attributes: {
  effect: 'XS: Move X, Dam (min(x,2))',
  time: 8,
  check_size: 6,
- successes: 'D',
+ successes: 'S',
  color: red
 }
 }

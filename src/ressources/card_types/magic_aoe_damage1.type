@@ -2,7 +2,7 @@
 name: magic_aoe_damage1,
 attributes: {
  title: magic_aoe_damage1,
- effect: 'Aoe 3
+ effect: 'Aoe 1
  
  Dam 1',
  time: 2,
