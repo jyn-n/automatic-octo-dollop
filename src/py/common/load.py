@@ -14,7 +14,10 @@ def load_type_dir ( path ):
 	result = dict()
 	for filename in path.glob ( directories.card_type_expression ):
 		with filename.open() as f:
-			result.update ( [load_type ( f )] )
+			try:
+				result.update ( [load_type ( f )] )
+			except:
+				print ( 'error reading file ' + f )
 	return result
 
 def _game_objects ( types , typenames ):

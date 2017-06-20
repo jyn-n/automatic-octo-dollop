@@ -7,6 +7,7 @@ attributes: {
  prevent all damage from one source',
  time: 1,
  check_size: 0,
- successes: D
+ successes: D,
+ color: darkGreen
 }
 }

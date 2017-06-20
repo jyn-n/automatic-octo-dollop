@@ -1,0 +1,13 @@
+!!python/object:common.load._type_file {
+name: magic_temp3,
+attributes: {
+ title: magic_temp3,
+ effect: 'Range 2
+ 
+ Move other 1 (ignoring zone of control)',
+ time: 1,
+ check_size: 0,
+ successes: '',
+ color: blue
+}
+}

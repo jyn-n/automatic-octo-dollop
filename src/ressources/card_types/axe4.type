@@ -2,11 +2,12 @@
 name: axe4,
 attributes: {
  title: axe4,
- effect: 'S: Dam 1 (x2)
+ effect: 'S: Dam 1 (x3)
  
  S: Target +1 (x00)',
  time: 7,
- check_size: 7,
- successes: ''
+ check_size: 8,
+ successes: '',
+ color: red
 }
 }

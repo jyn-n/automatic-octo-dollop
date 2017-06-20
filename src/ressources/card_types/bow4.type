@@ -8,9 +8,10 @@ attributes: {
  
  D: +1 Range
  
- Dam 1',
+ Dam 2',
  time: 5,
  check_size: 5,
- successes: ''
+ successes: '',
+ color: green
 }
 }

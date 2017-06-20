@@ -1,13 +1,13 @@
 !!python/object:common.load._type_file {
-name: bow1,
+name: magic_heal1,
 attributes: {
- title: bow1,
+ title: magic_heal1,
  effect: 'Range 3
  
- D: Dam 1',
- time: 4,
- check_size: 5,
+ Heal 2',
+ time: 1,
+ check_size: 0,
  successes: '',
- color: green
+ color: blue
 }
 }

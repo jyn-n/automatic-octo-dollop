@@ -1,0 +1,13 @@
+!!python/object:common.load._type_file {
+name: teleport,
+attributes: {
+ title: 'teleport',
+ effect: '-1 Mana
+
+ Move 1 (ignoring zone of control)',
+ time: 0,
+ check_size: 0,
+ successes: L,
+ color: purple
+}
+}

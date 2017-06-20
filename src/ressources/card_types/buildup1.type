@@ -5,6 +5,7 @@ attributes: {
  effect: 'S: S in next check (x2)',
  time: 2,
  check_size: 4,
- successes: ''
+ successes: '',
+ color: red
 }
 }

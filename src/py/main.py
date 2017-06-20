@@ -21,6 +21,12 @@ deck = load_deck ( d.decks / (sys.argv[1] + '.deck') , card_types )
 g.load_deck ( p , deck )
 g.cardworld() [ g.location ( p , pl.deck ) ].cardstack().shuffle()
 
+#for c in card_types.values():
+#	try:
+#		print (c['color'])
+#	except:
+#		print ('error: ' + c['title'])
+
 app = QtGui.QApplication(sys.argv)
 mw = main_window()
 

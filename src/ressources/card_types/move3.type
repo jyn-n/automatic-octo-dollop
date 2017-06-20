@@ -5,6 +5,7 @@ attributes: {
  effect: 'D: Move 2 (x2)',
  time: 1,
  check_size: 3,
- successes: ''
+ successes: '',
+ color: darkGreen
 }
 }

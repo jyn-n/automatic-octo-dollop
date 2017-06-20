@@ -5,6 +5,7 @@ attributes: {
  effect: 'S: Heal 2 (x3)',
  time: 2,
  check_size: 4,
- successes: ''
+ successes: '',
+ color: red
 }
 }

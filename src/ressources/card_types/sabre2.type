@@ -7,6 +7,7 @@ attributes: {
  D: Cycle 3',
  time: 3,
  check_size: 3,
- successes: 'S'
+ successes: 'S',
+ color: white
 }
 }

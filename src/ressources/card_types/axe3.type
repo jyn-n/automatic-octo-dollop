@@ -2,11 +2,14 @@
 name: axe3,
 attributes: {
  title: axe3,
- effect: 'S: Dam 1 (x2)
+ effect: 'S: Dam 2
+
+ S: Dam 1
  
  you can take a card from your hand as damage to add it to the check',
  time: 3,
  check_size: 3,
- successes: ''
+ successes: '',
+ color: red
 }
 }

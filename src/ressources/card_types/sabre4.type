@@ -9,6 +9,7 @@ attributes: {
  S: Dam 1 (different target)',
  time: 6,
  check_size: 5,
- successes: ''
+ successes: '',
+ color: white
 }
 }

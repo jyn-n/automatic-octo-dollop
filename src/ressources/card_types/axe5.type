@@ -2,9 +2,10 @@
 name: axe5,
 attributes: {
  title: axe5,
- effect: 'Dam 1',
+ effect: 'Dam 2',
  time: 4,
  check_size: 0,
- successes: 'D'
+ successes: 'D',
+ color: red
 }
 }

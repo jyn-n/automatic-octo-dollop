@@ -30,6 +30,9 @@ class CardWidget (ui_card_widget , base_class):
 			, (self.label_successes , self._card[ ca.successes ])
 			):
 			label.setText ( text )
+		palette = self.area_image.palette()
+		palette.setColor ( self.area_image.backgroundRole() , QtGui.QColor(self._card[ ca.color ]) )
+		self.area_image.setPalette ( palette )
 
 	def _rim_color ( self , color ):
 		palette = self.palette()

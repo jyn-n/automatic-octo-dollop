@@ -7,6 +7,7 @@ attributes: {
  Taunt 1',
  time: 2,
  check_size: 0,
- successes: DS
+ successes: DS,
+ color: gray
 }
 }

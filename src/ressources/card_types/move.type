@@ -5,6 +5,7 @@ attributes: {
  effect: 'Move X',
  time: X,
  check_size: 0,
- successes: D
+ successes: D,
+ color: darkGreen
 }
 }

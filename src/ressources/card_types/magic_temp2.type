@@ -1,0 +1,13 @@
+!!python/object:common.load._type_file {
+name: magic_temp2,
+attributes: {
+ title: magic_temp2,
+ effect: 'Range 2
+ 
+ Time +3',
+ time: 2,
+ check_size: 0,
+ successes: 'L',
+ color: blue
+}
+}

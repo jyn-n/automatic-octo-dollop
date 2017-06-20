@@ -1,11 +1,11 @@
 !!python/object:common.load._type_file {
-name: taunt,
+name: cycle,
 attributes: {
- title: 'taunt',
- effect: 'Taunt 1',
+ title: 'cycle',
+ effect: 'Cycle X',
  time: 1,
  check_size: 0,
- successes: S,
- color: darkRed
+ successes: L,
+ color: purple
 }
 }

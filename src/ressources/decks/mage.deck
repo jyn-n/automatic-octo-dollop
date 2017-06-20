@@ -1,0 +1,19 @@
+{
+deck: {
+ magic_aoe_damage1: 2,
+ magic_aoe_damage2: 4,
+ magic_aoe_damage3: 2,
+ magic_aoe_damage4: 4,
+ magic_heal1: 4,
+ magic_heal2: 2,
+ magic_damage1: 2,
+ magic_damage2: 2,
+ magic_damage3: 2,
+ magic_temp1: 2,
+ magic_temp2: 1,
+ magic_temp3: 2,
+ magic_temp4: 1,
+ cycle: 12,
+ teleport: 6
+ }
+}

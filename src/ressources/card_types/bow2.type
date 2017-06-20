@@ -4,9 +4,10 @@ attributes: {
  title: bow2,
  effect: 'Range 3
  
- D: Dam 1 (x2)',
+ D: Dam 1 (x3)',
  time: 7,
- check_size: 6,
- successes: ''
+ check_size: 7,
+ successes: 'D',
+ color: green
 }
 }

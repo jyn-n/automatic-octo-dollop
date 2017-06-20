@@ -1,11 +1,13 @@
 !!python/object:common.load._type_file {
-name: buildup2,
+name: magic_heal2,
 attributes: {
- title: buildup2,
- effect: 'Gain S-Counter',
- time: 3,
+ title: magic_heal2,
+ effect: 'Aoe 4
+ 
+ Heal 2',
+ time: 2,
  check_size: 0,
  successes: '',
- color: red
+ color: blue
 }
 }

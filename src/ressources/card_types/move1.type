@@ -9,6 +9,7 @@ attributes: {
  Time +1: Move +1',
  time: 2,
  check_size: 3,
- successes: ''
+ successes: '',
+ color: darkGreen
 }
 }

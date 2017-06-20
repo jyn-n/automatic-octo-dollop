@@ -2,9 +2,12 @@
 name: axe1,
 attributes: {
  title: axe1,
- effect: 'S: Dam 1 (x2)',
+ effect: 'S: Dam 1
+
+ S: Dam 2',
  time: 5,
  check_size: 5,
- successes: ''
+ successes: '',
+ color: red
 }
 }
