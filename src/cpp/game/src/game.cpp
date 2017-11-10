@@ -27,7 +27,7 @@ game::game ( event_manager_type & event_manager , count_type const & n_players ,
 	create_locations ();
 }
 
-auto game::stack_location ( object_type const & player , player_location loc ) const -> stack_location_type 
+auto game::stack_location ( object_type const & player , player_location const & loc ) const -> stack_location_type 
 {
 	if ( ! _players.count ( player.id() ) ) throw 1;
 

@@ -101,8 +101,8 @@ int main () {
 
 	print ( common::make_range ( game::player_location::begin() , game::player_location::end() ) );
 
-	game::player_location p ( "foo" );
-	game::location l ( "bar" );
+//	game::player_location p ( "foo" );
+//	game::location l ( "bar" );
 
 	return 0;
 }

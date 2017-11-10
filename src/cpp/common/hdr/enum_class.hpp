@@ -4,6 +4,7 @@
 
 #include <set>
 #include <functional>
+#include <vector>
 
 namespace common {
 
@@ -23,7 +24,12 @@ class enum_class {
 	protected:
 
 		using base_type = Base;
-		using container_type = std::set < std::reference_wrapper < base_type const > >;
+		//using container_type = std::set < std::reference_wrapper < this_type const > >;
+		using container_type = std::set < std::reference_wrapper< base_type const > >;
+
+	private:
+
+		base_type const & _this;
 
 	public:
 
@@ -31,18 +37,14 @@ class enum_class {
 
 		static container_type _instances;
 
-		static void construct ( base_type const & value );
-		static void destruct ( base_type const & value );
-
 	protected:
 
-		enum_class ( value_type && value );
+		enum_class ( value_type && value , base_type const & b );
 
 	public:
 
 		virtual ~enum_class ();
 
-//		operator value_type () const;
 		operator value_type const & () const;
 
 		static const_iterator begin ();

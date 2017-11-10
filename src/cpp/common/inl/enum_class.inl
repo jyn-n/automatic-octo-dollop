@@ -2,25 +2,19 @@
 namespace common {
 
 template < typename T , typename B >
-typename enum_class<T,B>::container_type enum_class<T,B>::_instances;
-
-template < typename T , typename B >
-enum_class<T,B>::enum_class ( value_type && value )
+enum_class<T,B>::enum_class ( value_type && value , base_type const & b )
 : _value ( std::move ( value ) )
+, _this ( b )
 {
+	_instances.insert(_this);
 }
 
 template < typename T , typename B >
 enum_class<T,B>::~enum_class ()
 {
+	_instances.erase(_this);
 }
-/*
-template < typename T , typename B >
-enum_class<T,B>::operator value_type () const
-{
-	return _value;
-}
-*/
+
 template < typename T , typename B >
 enum_class<T,B>::operator value_type const & () const
 {
@@ -37,18 +31,6 @@ template < typename T , typename B >
 auto enum_class<T,B>::end () -> const_iterator
 {
 	return _instances.cend();
-}
-
-template < typename T , typename B >
-void enum_class<T,B>::construct ( base_type const & value )
-{
-	_instances.insert ( value );
-}
-
-template < typename T , typename B >
-void enum_class<T,B>::destruct ( base_type const & value )
-{
-	_instances.erase ( value );
 }
 
 template < typename T , typename B >

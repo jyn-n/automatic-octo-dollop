@@ -71,7 +71,7 @@ class game {
 
 		game ( event_manager_type & event_manager , count_type const & n_players , rng_type & rng );
 
-		stack_location_type stack_location ( object_type const & player , player_location loc ) const;
+		stack_location_type stack_location ( object_type const & player , player_location const & loc ) const;
 
 		cardworld_type const & cardworld () const;
 

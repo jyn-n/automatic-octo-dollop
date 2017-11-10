@@ -4,14 +4,12 @@
 namespace game {
 
 card_attribute::card_attribute ( value_type && value )
-: enum_class_type ( std::move ( value ) )
+: enum_class_type ( std::move ( value ) , *this )
 {
-	construct ( *this );
 }
 
 card_attribute::~card_attribute ()
 {
-	destruct ( *this );
 }
 
 bool operator< ( card_attribute const & lhs , card_attribute const & rhs )
