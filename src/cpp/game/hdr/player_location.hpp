@@ -21,8 +21,6 @@ class player_location : public common::enum_class < core_types::key_type , playe
 		static player_location const play;
 };
 
-bool operator< ( player_location const & lhs , player_location const & rhs );
-
 }
 
 #endif

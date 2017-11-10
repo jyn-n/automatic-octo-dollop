@@ -17,8 +17,6 @@ class location : public common::enum_class < core_types::key_type , location >
 		static location const player;
 };
 
-bool operator< ( location const & lhs , location const & rhs );
-
 }
 
 #endif

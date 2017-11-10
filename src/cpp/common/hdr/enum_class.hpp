@@ -24,8 +24,7 @@ class enum_class {
 	protected:
 
 		using base_type = Base;
-		//using container_type = std::set < std::reference_wrapper < this_type const > >;
-		using container_type = std::set < std::reference_wrapper< base_type const > >;
+		using container_type = std::set < std::reference_wrapper< base_type const > , std::less < this_type > >;
 
 	private:
 

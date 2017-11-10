@@ -12,11 +12,6 @@ card_attribute::~card_attribute ()
 {
 }
 
-bool operator< ( card_attribute const & lhs , card_attribute const & rhs )
-{
-	return std::less < card_attribute::enum_class_type > () ( lhs , rhs );
-}
-
 card_attribute const card_attribute::title ( "title" );
 card_attribute const card_attribute::effect ( "effect" );
 card_attribute const card_attribute::time ( "time" );

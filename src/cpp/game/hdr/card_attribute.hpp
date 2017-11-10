@@ -21,8 +21,6 @@ class card_attribute : public common::enum_class<core_types::key_type, card_attr
 		static card_attribute const successes;
 };
 
-bool operator< ( card_attribute const & lhs , card_attribute const & rhs );
-
 }
 
 #endif

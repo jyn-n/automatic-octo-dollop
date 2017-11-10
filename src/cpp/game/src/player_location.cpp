@@ -12,11 +12,6 @@ player_location::~player_location ()
 {
 }
 
-bool operator< ( player_location const & lhs , player_location const & rhs )
-{
-	return std::less < player_location::enum_class_type > () ( lhs , rhs );
-}
-
 template<>
 typename player_location::enum_class_type::container_type player_location::enum_class_type::_instances {};
 
