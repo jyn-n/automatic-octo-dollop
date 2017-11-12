@@ -80,6 +80,9 @@ class cardworld {
 		template < typename T >
 		key_card_location move ( card_location<T> const & origin , stack_location const & destination );
 
+		key_card_location move ( stack_location const & origin_stack , key_type const & key , stack_location const & destination );
+		key_card_location move ( stack_location const & origin_stack , order_type const & position , stack_location const & destination );
+
 	private:
 
 		template < typename Begin , typename End = Begin >

@@ -1,15 +1,10 @@
 
-#include "core/cardworld.hpp"
-#include "common/event_manager.hpp"
-
-#include "game/player_location.hpp"
-#include "game/location.hpp"
-#include "common/iterator_range.hpp"
+#include "game/game.hpp"
 
 #include <iostream>
 
 #include <random>
-
+/*
 template < typename T >
 void print ( T const & t )
 {
@@ -37,20 +32,13 @@ std::ostream & operator<< ( std::ostream & out , game::location const & loc )
 {
 	return out << static_cast < std::string > (loc);
 }
-
-using event_context = int;
-
-void baz ( event_context & c )
-{
-	std::cout << c << '\n';
-	c = 2;
-}
-
+*/
 int main () {
-/*
+
 	std::random_device seed;
 	std::mt19937_64 rng { seed () };
 
+/*
 	core::game_object::object_base_type b;
 
 	core::cardworld world;
@@ -79,18 +67,8 @@ int main () {
 
 	print ( world.at(s1) );
 	print ( world.at(s2) );
-
-	common::event_manager<event_context> event;
-	event.register_event ( "foo" , [](event_context &){ std::cout << "foo\n"; } );
-	event.register_event ( "foo" , [](event_context &){ std::cout << "bar\n"; } );
-	event.register_event ( "foo" , baz );
-
-	event_context context = 1;
-
-	event ( "foo" , context );
-	baz ( context );
 */
-
+/*
 	print ( common::make_range ( game::player_location::begin() , game::player_location::end() ) );
 	print ( common::make_range ( game::location::begin() , game::location::end() ) );
 
@@ -100,6 +78,12 @@ int main () {
 	}
 
 	print ( common::make_range ( game::player_location::begin() , game::player_location::end() ) );
+*/
+
+	game::game::event_manager_type event_manager;
+	game::game ( event_manager , 1 , seed );
+
+	std::cout << "bar\n";
 
 	return 0;
 }

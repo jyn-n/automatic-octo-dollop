@@ -12,6 +12,9 @@ card_attribute::~card_attribute ()
 {
 }
 
+template<>
+typename card_attribute::enum_class_type::container_type card_attribute::enum_class_type::_instances {};
+
 card_attribute const card_attribute::title ( "title" );
 card_attribute const card_attribute::effect ( "effect" );
 card_attribute const card_attribute::time ( "time" );

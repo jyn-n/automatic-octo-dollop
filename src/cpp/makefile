@@ -2,10 +2,10 @@
 NAME := cardgame
 
 LD_FLAGS +=
-CXX_FLAGS += -std=c++17 -Wall -Wextra -pedantic -MMD -O2
+CXX_FLAGS += -std=c++1z -Wall -Wextra -pedantic -MMD -O2
 CXX ?= g++
 AR ?= ar
-AR_FLAGS ?= crvT
+AR_FLAGS += crvsT
 M4 ?= m4
 SED ?= sed
 MKDIR ?= mkdir
@@ -30,7 +30,10 @@ $(BASE_MAKEFILE): $(TEMPLATE_MAKEFILE)
 	$(M4) -D $(TEMPLATE_MACRO_NAME)= $(TEMPLATE_MAKEFILE) > $@
 	$(SED) -i -e 's/$$(-HERE)\///g' -e 's/\/$$(-HERE)//g' -e 's/-HERE := \//-HERE :=/' $@
 
--NAME := $(NAME)
+-ARCHIVE_NAME := $(BUILD_DIR)main.a
+
+$(NAME): $(-ARCHIVE_NAME)
+	$(CXX) $(LD_FLAGS) -o $@ $^
 
 clean: clean_base_makefile .clean
 

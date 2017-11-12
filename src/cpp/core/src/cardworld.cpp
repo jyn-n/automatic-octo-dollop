@@ -90,5 +90,14 @@ auto cardworld::move ( card_location<T> const & origin , stack_location const & 
 template auto cardworld::move<cardworld::key_type> ( card_location<key_type> const & origin , stack_location const & destination ) -> card_location < key_type >;
 template auto cardworld::move<cardworld::order_type> ( card_location<order_type> const & origin , stack_location const & destination ) -> card_location < key_type >;
 
+auto cardworld::move ( stack_location const & origin_stack , key_type const & key , stack_location const & destination ) -> key_card_location
+{
+	return move ( make_card_location ( origin_stack , key ) , destination );
+}
+
+auto cardworld::move ( stack_location const & origin_stack , order_type const & position , stack_location const & destination ) -> key_card_location
+{
+	return move ( make_card_location ( origin_stack , position ) , destination );
+}
 }
 

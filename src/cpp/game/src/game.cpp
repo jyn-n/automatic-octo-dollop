@@ -118,7 +118,7 @@ auto game::register_events () -> this_type &
 
 auto game::create_players ( count_type const & n_players ) -> this_type &
 {
-	for ( auto i = n_players; i > 0; ++i ) {
+	for ( auto i = n_players; i > 0; --i ) {
 		object_type player ( _base_player );
 		_players.insert ( std::make_pair ( player.id() , std::move ( player ) ) );
 	}
