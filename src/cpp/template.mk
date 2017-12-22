@@ -20,6 +20,8 @@ DIR__-BASE_DIRS := $(foreach f,$(DIR__-INCLUDE_DIRS),$(notdir $f))
 DIR__-MODULE_FILES := $(filter-out $(DIR__-DIRS),$(patsubst %/.,%/,$(wildcard $(DIR__-HERE)*/.)))
 DIR__-MODULE_MAKEFILES := $(DIR__-MODULE_FILES:%/=$(BUILD_DIR)%.mk)
 
+DIR__-MODULE_HEADERS := $(DIR__-MODULE_FILES:%/=%.headers)
+
 DIR__-MODULE_BUILD_DIRS := $(foreach f,$(DIR__-MODULE_FILES),$(DIR__-BUILD_DIR)$f)
 
 DIR__-CPP_FILES := $(wildcard $(DIR__-SRC_DIR)*.cpp)
@@ -47,7 +49,7 @@ $(DIR__-ARCHIVE_NAME): $(DIR__-BUILD_INL_FILES) $(DIR__-BUILD_HPP_FILES) $(DIR__
 	$(DIR_GUARD)
 	$(AR) $(AR_FLAGS) $@ $(filter $?,$(DIR__-OBJ_FILES)) $(DIR__-BUILD_ARCHIVE_FILES)
 
-$(DIR__-BUILD_OBJ_DIR)%.o: $(DIR__-SRC_DIR)%.cpp
+$(DIR__-BUILD_OBJ_DIR)%.o: $(DIR__-SRC_DIR)%.cpp .headers
 	$(BUILD_MESSAGE)
 	$(DIR_GUARD)
 	$(CXX) $(CXX_FLAGS) $(DIR__-INCLUDE_FLAGS) -c -o $@ $<
@@ -66,6 +68,8 @@ DIR__.clean: $(DIR__-MODULE_FILES:%/=%.clean)
 	@$(foreach f,$(DIR__-NAME) $(DIR__-ARCHIVE_NAME) $(DIR__-OBJ_FILES) $(DIR__-DEP_FILES) $(DIR__-MODULE_MAKEFILES) $(DIR__-BUILD_HPP_FILES) $(DIR__-BUILD_INL_FILES),$(if $(wildcard $f),echo -e $(RM) $f && $(RM) $f,true);)
 	@$(foreach f,$(DIR__-BUILD_OBJ_DIR) $(DIR__-BUILD_INCLUDE_DIR) $(DIR__-BUILD_DIR),$(if $(wildcard $f),echo -e $(RM) -d $f && $(RM) -d $f,true);)
 
+DIR__.headers: $(DIR__-BUILD_HPP_FILES) $(DIR__-BUILD_INL_FILES) $(DIR__-MODULE_HEADERS)
+
 
 $(DIR__-MODULE_MAKEFILES): $(TEMPLATE_MAKEFILE)
 	$(BUILD_MESSAGE)
@@ -76,5 +80,5 @@ $(DIR__-MODULE_MAKEFILES): $(TEMPLATE_MAKEFILE)
 
 include $(DIR__-MODULE_MAKEFILES)
 
-.PHONY: DIR__.clean
+.PHONY: DIR__.clean DIR__.headers
 
