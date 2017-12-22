@@ -38,31 +38,37 @@ DIR__-BUILD_ARCHIVE_FILES := $(foreach f,$(DIR__-MODULE_FILES),$(BUILD_OBJ_DIR)$
 DIR__-INCLUDE_FLAGS := $(DIR__-INCLUDE_DIRS:%=-I%) $(BUILD_INCLUDE_DIR:%=-I%)
 
 $(DIR__-NAME): $(DIR__-BUILD_INL_FILES) $(DIR__-BUILD_HPP_FILES) $(DIR__-BUILD_ARCHIVE_FILES) $(DIR__-OBJ_FILES)
+	$(BUILD_MESSAGE)
 	$(DIR_GUARD)
 	$(CXX) $(LD_FLAGS) -o $@ $(DIR__-OBJ_FILES) $(DIR__-BUILD_ARCHIVE_FILES)
 
 $(DIR__-ARCHIVE_NAME): $(DIR__-BUILD_INL_FILES) $(DIR__-BUILD_HPP_FILES) $(DIR__-BUILD_ARCHIVE_FILES) $(DIR__-OBJ_FILES)
+	$(BUILD_MESSAGE)
 	$(DIR_GUARD)
 	$(AR) $(AR_FLAGS) $@ $(filter $?,$(DIR__-OBJ_FILES)) $(DIR__-BUILD_ARCHIVE_FILES)
 
 $(DIR__-BUILD_OBJ_DIR)%.o: $(DIR__-SRC_DIR)%.cpp
+	$(BUILD_MESSAGE)
 	$(DIR_GUARD)
 	$(CXX) $(CXX_FLAGS) $(DIR__-INCLUDE_FLAGS) -c -o $@ $<
 
 $(DIR__-BUILD_INCLUDE_DIR)%.inl: $(DIR__-INL_DIR)%.inl
+	$(BUILD_MESSAGE)
 	$(DIR_GUARD)
 	$(CP) $< $@
 
 $(DIR__-BUILD_INCLUDE_DIR)%.hpp: $(DIR__-HDR_DIR)%.hpp
+	$(BUILD_MESSAGE)
 	$(DIR_GUARD)
 	$(CP) $< $@
 
 DIR__.clean: $(DIR__-MODULE_FILES:%/=%.clean)
-	@$(foreach f,$(DIR__-NAME) $(DIR__-ARCHIVE_NAME) $(DIR__-OBJ_FILES) $(DIR__-DEP_FILES) $(DIR__-MODULE_MAKEFILES) $(DIR__-BUILD_HPP_FILES) $(DIR__-BUILD_INL_FILES),$(if $(wildcard $f),echo $(RM) $f && $(RM) $f,true);)
-	@$(foreach f,$(DIR__-BUILD_OBJ_DIR) $(DIR__-BUILD_INCLUDE_DIR) $(DIR__-BUILD_DIR),$(if $(wildcard $f),echo $(RM) -d $f && $(RM) -d $f,true);)
+	@$(foreach f,$(DIR__-NAME) $(DIR__-ARCHIVE_NAME) $(DIR__-OBJ_FILES) $(DIR__-DEP_FILES) $(DIR__-MODULE_MAKEFILES) $(DIR__-BUILD_HPP_FILES) $(DIR__-BUILD_INL_FILES),$(if $(wildcard $f),echo -e $(RM) $f && $(RM) $f,true);)
+	@$(foreach f,$(DIR__-BUILD_OBJ_DIR) $(DIR__-BUILD_INCLUDE_DIR) $(DIR__-BUILD_DIR),$(if $(wildcard $f),echo -e $(RM) -d $f && $(RM) -d $f,true);)
 
 
 $(DIR__-MODULE_MAKEFILES): $(TEMPLATE_MAKEFILE)
+	$(BUILD_MESSAGE)
 	$(DIR_GUARD)
 	$(M4) -D $(TEMPLATE_MACRO_NAME)=$(@:$(BUILD_DIR)%.mk=%) $(TEMPLATE_MAKEFILE) > $@
 

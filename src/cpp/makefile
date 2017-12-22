@@ -12,7 +12,6 @@ MKDIR ?= mkdir
 RM ?= rm
 CP ?= cp
 
-all: $(NAME)
 
 TEMPLATE_MAKEFILE := template.mk
 TEMPLATE_MACRO_NAME := DIR__
@@ -24,8 +23,13 @@ BUILD_OBJ_DIR := $(BUILD_DIR)obj/
 BASE_MAKEFILE := $(BUILD_DIR)makefile
 
 DIR_GUARD=$(if $(wildcard $(@D)),,$(MKDIR) -p $(@D))
+BUILD_MESSAGE=@echo -e '\x1b[1;34m::\x1b[0m \x1b[1;39mMaking all completed\x1b[0m'
+
+all: $(NAME)
+	$(BUILD_MESSAGE)
 
 $(BASE_MAKEFILE): $(TEMPLATE_MAKEFILE)
+	$(BUILD_MESSAGE)
 	$(DIR_GUARD)
 	$(M4) -D $(TEMPLATE_MACRO_NAME)= $(TEMPLATE_MAKEFILE) > $@
 	$(SED) -i -e 's/$$(-HERE)\///g' -e 's/\/$$(-HERE)//g' -e 's/-HERE := \//-HERE :=/' $@
@@ -33,6 +37,7 @@ $(BASE_MAKEFILE): $(TEMPLATE_MAKEFILE)
 -ARCHIVE_NAME := $(BUILD_DIR)main.a
 
 $(NAME): $(-ARCHIVE_NAME)
+	$(BUILD_MESSAGE)
 	$(CXX) $(LD_FLAGS) -o $@ $^
 
 clean: clean_base_makefile .clean
