@@ -49,7 +49,7 @@ $(DIR__-ARCHIVE_NAME): $(DIR__-BUILD_INL_FILES) $(DIR__-BUILD_HPP_FILES) $(DIR__
 	$(DIR_GUARD)
 	$(AR) $(AR_FLAGS) $@ $(filter $?,$(DIR__-OBJ_FILES)) $(DIR__-BUILD_ARCHIVE_FILES)
 
-$(DIR__-BUILD_OBJ_DIR)%.o: $(DIR__-SRC_DIR)%.cpp .headers
+$(DIR__-BUILD_OBJ_DIR)%.o: $(DIR__-SRC_DIR)%.cpp
 	$(BUILD_MESSAGE)
 	$(DIR_GUARD)
 	$(CXX) $(CXX_FLAGS) $(DIR__-INCLUDE_FLAGS) -c -o $@ $<

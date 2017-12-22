@@ -25,7 +25,7 @@ BASE_MAKEFILE := $(BUILD_DIR)makefile
 DIR_GUARD=$(if $(wildcard $(@D)),,$(MKDIR) -p $(@D))
 BUILD_MESSAGE=@echo -e '\x1b[1;34m::\x1b[0m Making \x1b[1;39m$@\x1b[0m'
 
-all: start_message $(NAME)
+all: start_message .headers $(NAME)
 	@echo -e '\x1b[1;34m::\x1b[0m \x1b[1;39mMaking all completed\x1b[0m'
 
 $(BASE_MAKEFILE): $(TEMPLATE_MAKEFILE)
