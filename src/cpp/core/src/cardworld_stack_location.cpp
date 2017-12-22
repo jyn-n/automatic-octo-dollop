@@ -30,5 +30,24 @@ auto cardworld::stack_location::end () const -> const_iterator
 	return _items.end ();
 }
 
+auto cardworld::stack_location::operator== ( stack_location const & rhs ) const -> bool
+{
+	auto l = begin();
+	auto r = rhs.begin();
+
+	while ( l != end() && r != rhs.end() )
+	{
+		if ( *l != *r ) return false;
+		++l; ++r;
+	}
+
+	return l == end() && r == rhs.end();
+}
+
+auto cardworld::stack_location::operator!= ( stack_location const & rhs ) const -> bool
+{
+	return !((*this) == rhs);
+}
+
 }
 

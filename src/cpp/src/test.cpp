@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include <random>
-/*
+
 template < typename T >
 void print ( T const & t )
 {
@@ -32,11 +32,10 @@ std::ostream & operator<< ( std::ostream & out , game::location const & loc )
 {
 	return out << static_cast < std::string > (loc);
 }
-*/
+
 int main () {
 
 	std::random_device seed;
-	std::mt19937_64 rng { seed () };
 
 /*
 	core::game_object::object_base_type b;
@@ -81,9 +80,21 @@ int main () {
 */
 
 	game::game::event_manager_type event_manager;
-	game::game ( event_manager , 1 , seed );
+	game::game g ( event_manager , 1 , seed );
 
-	std::cout << "bar\n";
+	auto const & p = g.players().begin()->second;
+
+	game::game::object_base_type card_base;
+	card_base [ "foo" ] = 2;
+
+	for ( signed char i = 0; i < 10; ++i ) g.add_to_deck ( p , game::game::object_type ( card_base ) );
+
+	auto deck = g.stack_location ( p , game::player_location::deck );
+	auto discard = g.stack_location ( p , game::player_location::discard );
+
+	event_manager.operator()<game::event_name::reshuffle> ( deck , deck );
+
+	print ( g.cardworld().at ( deck ) );
 
 	return 0;
 }

@@ -25,6 +25,9 @@ class cardworld::stack_location {
 
 		const_iterator begin () const;
 		const_iterator end () const;
+
+		bool operator== ( stack_location const & rhs ) const;
+		bool operator!= ( stack_location const & rhs ) const;
 };
 
 }

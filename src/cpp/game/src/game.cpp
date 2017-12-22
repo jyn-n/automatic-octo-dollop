@@ -138,7 +138,7 @@ auto game::create_locations () -> this_type &
 
 auto game::reshuffle ( stack_location_type const & origin , stack_location_type const & destination ) -> void
 {
-	move_location ( origin , destination );
+	if ( origin != destination ) move_location ( origin , destination );
 	_cardworld [ destination ].shuffle ( _rng );
 }
 
@@ -149,6 +149,16 @@ auto game::move_top_reshuffling ( stack_location_type const & origin , stack_loc
 	reshuffle ( reshuffle_origin , origin );
 
 	return move_top ( origin , destination );
+}
+
+auto game::add_to_deck ( object_type const & player , object_type && object ) -> key_card_location_type
+{
+	return _cardworld.insert ( PSTACK ( deck ) , std::move ( object ) );
+}
+
+auto game::players () const -> common::iterator_range < player_container_type::const_iterator >
+{
+	return common::make_range ( _players.begin() , _players.end() );
 }
 
 #undef PSTACK

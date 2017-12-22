@@ -80,6 +80,10 @@ class game {
 
 		bool move_top_reshuffling ( stack_location_type const & origin , stack_location_type const & destination , stack_location_type const & reshuffle_origin );
 
+		key_card_location_type add_to_deck ( object_type const & player , object_type && object );
+
+		common::iterator_range < player_container_type::const_iterator > players () const;
+
 	private:
 
 		this_type & register_events ();
