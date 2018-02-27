@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include <random>
+#include "ui/ui.hpp"
 
 template < typename T >
 void print ( T const & t )
@@ -35,7 +35,7 @@ std::ostream & operator<< ( std::ostream & out , game::location const & loc )
 
 int main () {
 
-	std::random_device seed;
+	game::game::rng_type seed;
 
 /*
 	core::game_object::object_base_type b;
@@ -90,11 +90,18 @@ int main () {
 	for ( signed char i = 0; i < 10; ++i ) g.add_to_deck ( p , game::game::object_type ( card_base ) );
 
 	auto deck = g.stack_location ( p , game::player_location::deck );
-	auto discard = g.stack_location ( p , game::player_location::discard );
+	//auto discard = g.stack_location ( p , game::player_location::discard );
 
 	event_manager.operator()<game::event_name::reshuffle> ( deck , deck );
 
-	print ( g.cardworld().at ( deck ) );
+	//print ( g.cardworld().at ( deck ) );
+
+	ui::ui u ( g , event_manager , std::cin , std::cout );
+
+	u.process_command();
+
+	//std::cout << game::player_location::id(game::player_location::play) << ' ' << static_cast<std::string>(game::player_location::from_id(1)) << '\n';
+	//std::cout << static_cast<std::string> ( u.read<game::player_location>() ) << '\n';
 
 	return 0;
 }

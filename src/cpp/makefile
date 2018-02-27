@@ -44,6 +44,7 @@ start_message:
 	@echo -e '\x1b[1;34m::\x1b[0m \x1b[1;39mMaking all\x1b[0m'
 
 clean: clean_base_makefile .clean
+	$(RM) $(NAME)
 
 clean_base_makefile:
 	$(RM) $(BASE_MAKEFILE)

@@ -33,6 +33,7 @@ class enum_class {
 	public:
 
 		using const_iterator = typename container_type::const_iterator;
+		using size_type = typename container_type::size_type;
 
 		static container_type _instances;
 
@@ -49,10 +50,17 @@ class enum_class {
 		static const_iterator begin ();
 		static const_iterator end ();
 
+		static size_type id ( base_type const & b );
+		static base_type const & from_id ( size_type const & i );
+
+		static base_type const & from_value ( value_type const & value );
 };
 
 template < typename T , typename B >
 bool operator< ( enum_class<T,B> const & lhs , enum_class<T,B> const & rhs );
+
+template < typename T , typename B >
+bool operator== ( enum_class<T,B> const & lhs , enum_class<T,B> const & rhs );
 
 }
 
